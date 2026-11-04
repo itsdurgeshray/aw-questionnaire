@@ -1,0 +1,1390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Endocrine Health Assessment | Autonomic Wellness</title>
+<meta name="description" content="A doctor-reviewed online health assessment in nine sections.">
+<link rel="icon" href="assets/logo.png">
+<style>
+@font-face{font-family:aeonik;src:url(assets/Aeonik-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:aeonik;src:url(assets/Aeonik-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:aeonik;src:url(assets/Aeonik-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+
+:root{
+  --aw-ink-950:#020a1d;--aw-ink-800:#1b294b;--aw-ink-700:#243763;--aw-ink-600:#2c4278;
+  --aw-slate-600:#59647d;--aw-slate-500:#7c8394;
+  --aw-blue-700:#163f9d;--aw-blue-300:#8098d1;--aw-blue-150:#bfd2fe;--aw-blue-25:#eff4ff;
+  --aw-green-600:#169d69;--aw-green-200:#8fefca;--aw-green-50:#edfcf7;
+  --aw-amber-500:#fa0;--aw-amber-50:#fffbef;
+  --line:#e4e8f0;--mute:#687083;--q:#243763;--green:#169d69;--mint:#edfcf7;
+  --acc:#8098d1;--acc-l:#e9eefc;--acc-d:#47599c;
+  --shadow-sm:0 1px 3px 0 #0000001a,0 1px 2px -1px #0000001a;
+  --gradient-cta:linear-gradient(180deg,rgba(151,170,217,.24) 0%,rgba(44,66,120,.24) 100%),#2c4278;
+  --ease:cubic-bezier(.21,.47,.32,.98);--spring:cubic-bezier(.34,1.56,.64,1);
+  --hdr-h:150px;--bar-h:88px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;border:0 solid}
+html{-webkit-text-size-adjust:100%}
+body{font-family:aeonik,"Helvetica Neue",Arial,sans-serif;background:#f6f7fa;color:var(--q);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip;min-height:100vh}
+button,textarea{font:inherit;color:inherit;background:none}
+button{cursor:pointer}button:disabled{cursor:default}
+i,em{font-style:normal}
+svg.i{width:20px;height:20px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:focus-visible{outline:3px solid rgba(128,152,209,.45);outline-offset:2px}
+#app{position:relative}
+
+/* ===== Section scenes: soft game worlds behind the questionnaire ===== */
+.worlds{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#f6f7fa}
+.world{position:absolute;inset:0;opacity:0;transition:opacity 1.4s linear}
+.world.on{opacity:1}
+.world .ph{position:absolute;inset:-3%;background-size:cover;background-position:50% 100%;animation:drift 60s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-1%,-.6%,0) scale(1.035)}}
+.world .veil{position:absolute;inset:0;background:radial-gradient(ellipse 44% 56% at 50% 44%,rgba(248,249,251,.6) 0,rgba(248,249,251,.3) 55%,rgba(248,249,251,0) 100%),linear-gradient(90deg,rgba(248,249,251,0) 0,rgba(248,249,251,.5) 24%,rgba(248,249,251,.5) 76%,rgba(248,249,251,0) 100%),linear-gradient(180deg,rgba(248,249,251,.4) 0,rgba(248,249,251,0) 60%)}
+.motes{position:absolute;inset:0;overflow:hidden}
+.motes i{position:absolute;bottom:-12px;width:var(--z);height:var(--z);border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95),rgba(255,255,255,0) 70%);opacity:0;animation:mote var(--d) linear var(--dl) infinite}
+@keyframes mote{0%{transform:translate(0,0);opacity:0}15%{opacity:.85}80%{opacity:.6}100%{transform:translate(var(--dx),-72vh);opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== Buttons ===== */
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;min-width:190px;padding:0 28px;border-radius:8px;background:var(--gradient-cta);border:1.5px solid #243763;color:#fff;font-size:16px;font-weight:500;box-shadow:var(--shadow-sm);transition:transform .25s,opacity .25s;white-space:nowrap}
+.cta:hover{transform:scale(1.02)}.cta:active{transform:scale(.98)}
+.cta:disabled{opacity:.4;pointer-events:none}
+.cta svg.i{width:18px;height:18px}
+.ghost{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding:0 24px;border-radius:8px;background:#fff;border:1px solid var(--line);color:var(--aw-ink-950);font-size:16px;font-weight:500;box-shadow:var(--shadow-sm);transition:background .2s}
+.ghost:hover{background:var(--aw-blue-25)}
+.ghost svg.i{width:18px;height:18px}
+.save{font-size:16px;color:var(--mute);text-decoration:underline;text-underline-offset:5px;text-decoration-color:#c5cad6;transition:color .2s;white-space:nowrap}
+.save:hover{color:var(--q)}
+
+/* ===== Header (persistent) ===== */
+.top{position:sticky;top:0;z-index:50}
+.top::before{content:"";position:absolute;inset:0 0 -48px;z-index:-1;pointer-events:none;background:rgba(250,251,252,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);-webkit-mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 64px),transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 64px),transparent 100%)}
+.top .in{max-width:1164px;margin:0 auto;padding:22px 24px 18px}
+.hrow{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+.ttl{min-width:0}
+.ttl h1{font-size:24px;line-height:32px;font-weight:500;color:var(--aw-ink-950);letter-spacing:-.01em}
+.ttl p{margin-top:2px;font-size:14px;line-height:20px;letter-spacing:.02em;text-transform:uppercase;color:var(--mute);font-variant-numeric:tabular-nums}
+.hr{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
+.pills{display:flex;align-items:center;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:100px;border:1.5px solid var(--line);background:#fff;font-size:14px;font-weight:500;white-space:nowrap;transition:background .6s,border-color .6s,color .6s}
+.pill.sec{background:var(--acc-l);border-color:var(--acc);color:var(--acc-d)}
+.pill.time{border-color:var(--aw-blue-150);color:#5a6fae}
+.pill.bdg{color:var(--q)}
+.pill.bdg svg.i{width:16px;height:16px;color:var(--acc-d)}
+.pill.bdg:hover{background:var(--aw-blue-25)}
+.pill.xp{gap:8px;border-color:#ffd88a;background:var(--aw-amber-50);color:#8a5a00;font-variant-numeric:tabular-nums}
+.pill.leaf{gap:6px;border-color:#b5d98a;background:#f5fbec;color:#3d7419;font-variant-numeric:tabular-nums}
+.pill.leaf b{font-weight:700}
+.lf-i{display:inline-block;width:16px;height:16px;flex-shrink:0}
+.lf-i svg{width:100%;height:100%;display:block}
+.pill.leaf.hit .lf-i{animation:wig .5s var(--spring)}
+@keyframes wig{30%{transform:rotate(-18deg) scale(1.2)}70%{transform:rotate(10deg)}}
+.pill.xp b{font-weight:700}
+.coin-i{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff3c4,#ffc33d 55%,#e08e00);box-shadow:inset 0 -1px 0 rgba(0,0,0,.14);transition:box-shadow .3s}
+.pill.hit{animation:hit .42s var(--spring)}
+.pill.xp.hit .coin-i{box-shadow:0 0 0 4px rgba(255,190,60,.28),0 0 14px 4px rgba(255,190,60,.65)}
+@keyframes hit{40%{transform:scale(1.1)}}
+.pct{font-size:12px;line-height:16px;letter-spacing:.04em;text-transform:uppercase;color:var(--mute)}
+.pct b{font-weight:400}
+
+.segs{display:flex;gap:8px;margin-top:32px}
+.sg{flex:1;min-width:0}
+.tr{position:relative;display:block;height:6px;border-radius:6px;background:#eceff4}
+.tr>i{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:var(--green);transition:width .6s var(--ease)}
+.cr{position:absolute;top:-33px;width:40px;height:40px;transform:translateX(-50%) scale(var(--g,1));transform-origin:50% 85%;transition:left .6s var(--ease),transform .6s var(--ease)}
+.cr svg{width:100%;height:100%;display:block}
+.cr.up{left:50%;filter:grayscale(1) brightness(1.15);opacity:.45}
+.cr.ride{z-index:2;filter:drop-shadow(0 2px 3px rgba(27,41,75,.18))}
+.cr.ride.hop{animation:hop .5s var(--spring)}
+@keyframes hop{40%{transform:translate(-50%,-7px) scale(var(--g,1))}}
+.cr.ride.eat{animation:eat .5s var(--spring)}
+@keyframes eat{30%{transform:translateX(-50%) scale(calc(var(--g,1) * 1.28))}65%{transform:translateX(-50%) scale(calc(var(--g,1) * .94))}}
+.leafp{position:fixed;left:0;top:0;width:20px;height:20px;margin:-10px 0 0 -10px;z-index:70;pointer-events:none;filter:drop-shadow(0 2px 3px rgba(40,90,30,.25))}
+.leafp svg{width:100%;height:100%;display:block}
+.nm{display:block;margin-top:10px;text-align:center;font-size:14px;line-height:20px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sg.cur .nm{color:var(--q);font-weight:500}
+.cap{display:none}
+
+/* ===== Layer 2: the question ===== */
+.stage{min-height:calc(100vh - var(--hdr-h));min-height:calc(100dvh - var(--hdr-h));display:flex;flex-direction:column;align-items:center;padding:64px 24px calc(var(--bar-h) + env(safe-area-inset-bottom) + 24px)}
+.stage.center{justify-content:center;padding-top:40px;padding-bottom:40px}
+.qz,.cue{transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.qz{width:100%;display:flex;flex-direction:column;align-items:center}
+.qz.rise{animation:rise2 .6s var(--ease) both}
+@keyframes rise2{from{opacity:0;transform:translateY(16px)}}
+body.soft .qz,body.soft .cue{opacity:0;transform:translateY(24px);pointer-events:none}
+.eyeg{display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px;line-height:20px;color:var(--mute)}
+.dots{display:grid;grid-template-columns:repeat(3,4px);gap:2px}
+.dots i{width:4px;height:4px;border-radius:1px;background:var(--green)}
+.dots i:nth-child(3n+2){background:var(--aw-green-200)}.dots i:nth-child(4n){background:#45c08e}
+.qrow{display:grid;grid-template-columns:48px 1fr 48px;align-items:center;gap:24px;width:100%;max-width:828px;margin-top:16px}
+.qtitle{font-size:32px;line-height:40px;font-weight:400;color:var(--q);text-align:center;letter-spacing:-.01em;text-wrap:balance}
+.arrow{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.9);background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 2px 12px rgba(27,41,75,.07);display:grid;place-items:center;color:var(--q);transition:border-color .2s,opacity .2s,transform .2s}
+.arrow:hover{border-color:var(--aw-blue-300)}
+.arrow:disabled{opacity:.35}
+.qhelp{max-width:576px;margin-top:10px;text-align:center;font-size:16px;line-height:24px;color:var(--mute)}
+.term{color:var(--aw-blue-700);text-decoration:underline dotted;text-decoration-thickness:1.5px;text-underline-offset:5px;border-radius:4px;font:inherit}
+.term[aria-expanded="true"]{background:var(--aw-blue-25);text-decoration-style:solid}
+
+.opts{width:100%;max-width:576px;display:flex;flex-direction:column;gap:12px;margin-top:48px}
+.opt{position:relative;display:flex;align-items:center;gap:16px;min-height:56px;padding:14px 20px;background:#fff;border:1px solid #edf0f5;border-radius:6px;text-align:left;font-size:18px;line-height:24px;color:var(--q);box-shadow:0 1px 2px rgba(16,24,40,.04);transition:border-color .2s,background .2s,transform .2s}
+.opt:hover{border-color:#c9d2e3}
+.opt:active{transform:scale(.995)}
+.rd{width:20px;height:20px;border-radius:50%;border:1.5px solid #d3d9e5;flex-shrink:0;display:grid;place-items:center;transition:.2s}
+.rd svg{width:12px;height:12px;fill:none;stroke:#fff;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+.multi .rd{border-radius:5px}
+.opt[aria-checked="true"]{background:var(--mint);border-color:var(--green);box-shadow:inset 0 0 0 .5px var(--green)}
+.opt[aria-checked="true"] .rd{background:var(--green);border-color:var(--green)}
+.opt[aria-checked="true"] .rd svg{opacity:1}
+.opt .tx{display:flex;flex-direction:column}
+.opt .s{display:none;font-size:14px;line-height:20px;color:var(--mute)}
+
+.ta{width:100%;max-width:576px;min-height:160px;margin-top:48px;padding:16px;border:1px solid #e3e7ef;border-radius:8px;background:#fff;font-size:18px;line-height:28px;color:var(--q);resize:vertical}
+
+/* A few quick ones: short questions as tidy cards on one screen */
+.qk{width:100%;max-width:828px;margin-top:32px;display:flex;flex-direction:column;gap:12px}
+.qk-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:40px}
+.qk-bar p{font-size:16px;line-height:24px;color:var(--mute)}
+.qk-none{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:100px;background:rgba(255,255,255,.85);border:1px solid #e3e7ef;font-size:14px;font-weight:500;color:var(--q);white-space:nowrap;flex-shrink:0;transition:background .2s,border-color .2s}
+.qk-none svg.i{width:16px;height:16px}
+.qk-none:hover{border-color:#c9d2e3}
+.qk-none[aria-pressed="true"]{background:var(--mint);border-color:var(--green);color:#0d6e49}
+.qk-q{padding:18px 20px 20px;background:rgba(255,255,255,.92);border:1px solid #edf0f5;border-radius:12px;box-shadow:0 1px 2px rgba(16,24,40,.04);transition:border-color .25s;scroll-margin-top:calc(var(--hdr-h) + 24px)}
+.qk-q.ok{border-color:#cdeedd}
+.qk-t{display:flex;align-items:center;gap:12px;font-size:18px;line-height:26px;color:var(--q)}
+.qk-t .n{flex-shrink:0;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#f1f4f9;font-size:14px;color:var(--mute);font-variant-numeric:tabular-nums;transition:background .25s,color .25s}
+.qk-t .n svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+.qk-q.ok .qk-t .n{background:var(--green);color:#fff}
+.opts.row{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:8px;max-width:none;margin-top:14px;padding-left:40px}
+.opts.row .opt{min-height:48px;gap:10px;padding:10px 14px;font-size:16px;line-height:22px;border-color:#e6eaf1;box-shadow:none}
+.opts.row .rd{width:18px;height:18px}
+
+/* Cue card */
+.cue{width:100%;max-width:576px;margin:20px auto 0}
+.cue.wide{max-width:828px}
+.cuec{display:flex;gap:12px;align-items:flex-start;padding:16px 18px;background:rgba(255,255,255,.97);border:1px solid #e6eaf1;border-radius:8px}
+.cuec svg.i{width:20px;height:20px;margin-top:1px;color:var(--q)}
+.cuec b{display:block;font-size:14px;line-height:20px;font-weight:500;color:var(--aw-ink-950)}
+.cuec p{margin-top:2px;font-size:14px;line-height:20px;color:var(--mute)}
+.cuec dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 16px;margin-top:6px;font-size:14px;line-height:20px}
+.cuec dt{color:var(--q);font-weight:500}.cuec dd{color:var(--mute)}
+
+/* Bottom bar */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:45;height:calc(var(--bar-h) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom)}
+.bar::before{content:"";position:absolute;inset:-48px 0 0;z-index:-1;pointer-events:none;background:rgba(250,251,252,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);-webkit-mask-image:linear-gradient(0deg,#000 0,#000 calc(100% - 64px),transparent 100%);mask-image:linear-gradient(0deg,#000 0,#000 calc(100% - 64px),transparent 100%)}
+.bin{height:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:0 56px}
+.bl{display:flex;align-items:center;gap:20px}
+.tools{display:flex;gap:4px;padding-left:16px;border-left:1px solid var(--line)}
+.ib{width:40px;height:40px;border-radius:8px;display:grid;place-items:center;color:var(--mute);transition:.2s}
+.ib:hover{color:var(--q);background:#f3f5f9}
+.ib[aria-pressed="true"]{color:var(--q)}
+.bc{display:flex;gap:32px}
+.tl{display:inline-flex;align-items:center;gap:10px;font-size:16px;color:var(--q);transition:color .2s;white-space:nowrap}
+.tl:hover{opacity:.75}
+.tl svg.i{width:22px;height:22px}
+.br{display:flex;justify-content:flex-end}
+
+/* Leaf flight */
+.coin{position:fixed;left:0;top:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff6cf,#ffc53d 55%,#e89400);box-shadow:0 0 10px 2px rgba(255,190,60,.6);z-index:70;pointer-events:none}
+.xpf{position:fixed;z-index:70;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:100px;background:#f5fbec;border:1px solid #b5d98a;color:#3d7419;font-size:14px;font-weight:700;white-space:nowrap;pointer-events:none;box-shadow:0 8px 20px -8px rgba(168,106,0,.4);animation:xpf .95s var(--ease) forwards}
+@keyframes xpf{0%{opacity:0;transform:translate(-50%,-30%) scale(.8)}18%{opacity:1;transform:translate(-50%,-90%) scale(1)}65%{opacity:1;transform:translate(-50%,-120%)}100%{opacity:0;transform:translate(-50%,-150%) scale(.92)}}
+.flybadge{position:fixed;left:0;top:0;width:40px;height:40px;margin:-20px 0 0 -20px;z-index:70;pointer-events:none}
+.flybadge svg{width:100%;height:100%}
+.toast{position:fixed;left:50%;top:calc(var(--hdr-h) + 16px);z-index:55;display:flex;align-items:center;gap:10px;height:44px;padding:0 18px;border-radius:100px;background:#fff;border:1px solid #b5d98a;box-shadow:0 12px 30px -12px rgba(27,41,75,.28);font-size:16px;font-weight:500;color:var(--q);white-space:nowrap;opacity:0;visibility:hidden;transform:translate(-50%,-12px);transition:.35s var(--ease)}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.toast b{color:#3d7419}
+.toast .lf-i{width:20px;height:20px}
+
+/* ===== Section complete: the new life stage and a discovery on one screen ===== */
+.reward{position:fixed;inset:0;z-index:46;overflow-y:auto;display:flex;padding:calc(var(--hdr-h) + 24px) 16px 96px;background:radial-gradient(ellipse 60% 70% at 50% 45%,rgba(255,255,255,.72),rgba(255,255,255,.26) 76%);opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility .5s}
+.reward.open{opacity:1;visibility:visible}
+.bar{transition:opacity .4s var(--ease)}
+body.soft .bar{opacity:0;pointer-events:none}
+.rw{width:100%;max-width:640px;margin:auto;display:flex;flex-direction:column;align-items:center;text-align:center}
+.st{opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.p1 .s1,.p2 .s2,.p3 .s3{opacity:1;transform:none}
+.bwrap{position:relative;width:168px;height:168px;margin:0 0 18px;perspective:900px}
+.bwrap>span{position:absolute;inset:0;display:block}
+.bwrap .halo{inset:-70px;border-radius:50%;background:radial-gradient(circle,var(--acc-l) 0,transparent 66%);opacity:0;transform:scale(.6);transition:1s var(--ease)}
+.p1 .halo{opacity:1;transform:none}
+.bwrap .rays{inset:-90px;border-radius:50%;background:repeating-conic-gradient(from 0deg,transparent 0 9deg,color-mix(in srgb,var(--acc) 24%,transparent) 9deg 13deg,transparent 13deg 24deg);-webkit-mask:radial-gradient(circle,#000 22%,transparent 68%);mask:radial-gradient(circle,#000 22%,transparent 68%);opacity:0;transition:opacity 1.2s;animation:spin 40s linear infinite}
+.p2 .rays{opacity:1}
+.flipped .rays{opacity:.25}
+.bsil{opacity:0;transform:scale(.5);transition:opacity .6s var(--ease),transform .9s var(--spring)}
+.bsil svg{width:100%;height:100%;filter:drop-shadow(0 0 16px var(--acc)) drop-shadow(0 0 4px #fff)}
+.p1 .bsil{opacity:1;transform:none;animation:pulse 1.2s ease-in-out infinite}
+.p2 .bsil{opacity:0;animation:none;transition-duration:.3s}
+.fwrap{opacity:0}
+.p2 .fwrap{animation:unlock 1.1s var(--ease) forwards}
+@keyframes unlock{0%{opacity:0;transform:scale(.35) rotateY(-260deg)}55%{opacity:1;transform:scale(1.14) rotateY(18deg)}78%{transform:scale(.97) rotateY(-6deg)}100%{opacity:1;transform:none}}
+@keyframes pulse{50%{transform:scale(1.05)}}
+.flip{position:absolute;inset:0;display:block;transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.65,0,.35,1)}
+.flip .face{position:absolute;inset:0;display:block;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.flip .face svg{width:100%;height:100%;filter:drop-shadow(0 16px 20px rgba(27,41,75,.2))}
+.stg,.sbadge{display:block;width:100%;height:100%;object-fit:contain;-webkit-user-drag:none;user-select:none}
+.sbadge{filter:drop-shadow(0 16px 22px rgba(27,41,75,.22))}
+.sbadge.lock{filter:grayscale(1) brightness(1.08) opacity(.55)}
+.sbadge.glow{filter:brightness(0) invert(1) drop-shadow(0 0 18px var(--acc)) drop-shadow(0 0 4px #fff)}
+.face .lk{position:absolute;right:4%;bottom:4%;width:40px;height:40px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--mute);box-shadow:0 4px 12px rgba(27,41,75,.18)}
+.face .lk svg.i{width:18px;height:18px}
+.flip .back{transform:rotateY(180deg)}
+.flipped .flip{transform:rotateY(180deg)}
+.p2 .front .shine{animation:shine 1.3s .7s var(--ease) forwards}
+@keyframes shine{to{transform:translateX(280px)}}
+.lbl{display:grid}
+.lbl>div{grid-area:1/1;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.lbl .nx{opacity:0;transform:translateY(8px)}
+.flipped .lbl .now{opacity:0;transform:translateY(-8px)}
+.flipped .lbl .nx{opacity:1;transform:none}
+.lbl small{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:14px;line-height:20px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.lbl small svg.i{width:14px;height:14px}
+.lbl b{display:block;margin-top:4px;font-size:40px;line-height:48px;font-weight:500;color:var(--aw-ink-950);letter-spacing:-.01em}
+.lbl p{margin-top:4px;font-size:16px;line-height:24px;color:var(--aw-slate-600)}
+.rfact{width:100%;margin-top:28px;padding:28px 32px;background:#fff;border:1px solid rgba(230,234,241,.9);border-radius:16px;text-align:left;box-shadow:0 24px 60px -30px rgba(27,41,75,.28)}
+.feye{display:flex;align-items:center;gap:8px;font-size:16px;line-height:24px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--acc-d)}
+.feye svg.i{width:20px;height:20px}
+.rfact h3{margin-top:12px;font-size:28px;line-height:36px;font-weight:500;color:var(--aw-ink-950);letter-spacing:-.01em}
+.rfact p.fb{margin-top:10px;font-size:18px;line-height:28px;color:var(--aw-slate-600)}
+.acts{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:40px}
+.acts .cta{min-width:280px}
+.cd{position:fixed;left:0;right:0;bottom:calc(28px + env(safe-area-inset-bottom));text-align:center;font-size:16px;line-height:24px;color:var(--mute)}
+.cd b{color:var(--green);font-weight:500;font-variant-numeric:tabular-nums}
+.cd button{margin-left:12px;font-size:14px;color:var(--aw-blue-700);text-decoration:underline;text-underline-offset:4px}
+@media (max-height:940px) and (min-width:768px){.bwrap{width:132px;height:132px;margin-bottom:12px}.lbl b{font-size:32px;line-height:40px}.rfact{margin-top:20px;padding:22px 28px}.rfact h3{font-size:24px;line-height:32px}.acts{margin-top:24px}}
+@media (max-width:767px){.lbl b{font-size:28px;line-height:36px}.acts .cta{min-width:0}.cd{position:static;margin-top:16px}.reward{padding-bottom:calc(24px + env(safe-area-inset-bottom))}}
+
+/* Jump to question: a small panel above the bar */
+.jpop{position:fixed;left:50%;bottom:calc(var(--bar-h) + env(safe-area-inset-bottom) + 12px);z-index:47;width:min(540px,calc(100% - 32px));padding:18px 20px 14px;background:#fff;border:1.5px solid var(--green);border-radius:16px;box-shadow:0 24px 60px -24px rgba(27,41,75,.35);opacity:0;visibility:hidden;transform:translate(-50%,12px);transition:opacity .25s var(--ease),transform .25s var(--ease),visibility .25s}
+.jpop.open{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.jh{display:flex;align-items:center;gap:4px;margin-bottom:14px}
+.jh h2{min-width:0;font-size:20px;line-height:28px;font-weight:500;color:var(--aw-ink-950);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jn,.jx{width:40px;height:40px;border-radius:8px;display:grid;place-items:center;flex-shrink:0;color:var(--q)}
+.jn:disabled{opacity:.28}
+.jx{margin-left:auto}
+.jn:hover:not(:disabled),.jx:hover{background:#f3f5f9}
+.jg{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:8px}
+.jc{height:40px;border-radius:6px;border:1px solid #dfe3eb;background:#fff;font-size:16px;color:var(--q);font-variant-numeric:tabular-nums;transition:border-color .15s,background .15s}
+.jc:hover:not(:disabled){border-color:#b9c3d6}
+.jc.a{border-color:#7fd1ac;background:var(--mint);color:#0d7a50}
+.jc.c{border:2px solid var(--green);color:#0d7a50;font-weight:500}
+.jc:disabled{background:#f8f9fb;border-color:#eceff4;color:#b3bac8}
+.jf{margin-top:14px;text-align:center;font-size:14px;line-height:20px;color:var(--mute)}
+@media (max-width:767px){.jpop{width:calc(100% - 24px);padding:14px 14px 12px}.jg{grid-template-columns:repeat(6,minmax(0,1fr))}.jc{height:44px}}
+
+/* Intro / saved / complete */
+.panel{width:100%;max-width:760px;margin:auto;padding:40px;text-align:center;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid #fff;border-radius:20px;box-shadow:0 30px 80px -40px rgba(27,41,75,.35);animation:rise2 .7s var(--ease) both}
+.panel h2{margin-top:12px;font-size:40px;line-height:48px;font-weight:500;color:var(--aw-ink-950);letter-spacing:-.01em;text-wrap:balance}
+.panel .ip{max-width:560px;margin:12px auto 0;font-size:18px;line-height:28px;color:var(--aw-slate-600)}
+.facts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:24px}
+.facts span{display:inline-block;line-height:34px;height:36px;padding:0 14px;border-radius:100px;background:#fff;border:1px solid var(--line);font-size:14px;color:var(--aw-slate-600)}
+.facts b{margin-right:4px;color:var(--q);font-weight:500}
+.mech{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
+.mech div{padding:16px 12px;border-radius:12px;background:#fff;border:1px solid var(--line)}
+.mech .mi{width:40px;height:40px;margin:0 auto;border-radius:10px;display:grid;place-items:center}
+.mech b{display:block;margin-top:10px;font-size:16px;line-height:22px;font-weight:500;color:var(--aw-ink-950)}
+.mech span{display:block;margin-top:2px;font-size:14px;line-height:20px;color:var(--mute)}
+.strip{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:28px}
+.strip svg{width:44px;height:44px;display:block}
+.sth{display:block;width:48px;height:48px;filter:grayscale(1);opacity:.4}
+.sth.on{filter:none;opacity:1}
+.mi .stg{width:36px;height:36px}
+.ctas{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px 24px;margin-top:32px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+.stats div{padding:16px;border-radius:12px;background:#fff;border:1px solid var(--line)}
+.stats b{display:block;font-size:24px;line-height:32px;font-weight:500;color:var(--aw-ink-950);font-variant-numeric:tabular-nums}
+.stats span{font-size:14px;color:var(--mute)}
+.cmp-art{width:120px;height:120px;margin:0 auto}
+.cmp-art svg{width:100%;height:100%}
+.bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.panel .bgrid{grid-template-columns:repeat(9,1fr);gap:8px;margin-top:24px}
+.panel .bcell{padding:8px 4px;border:0}
+.panel .bcell b,.panel .bcell span{display:none}
+.bcell{display:flex;flex-direction:column;align-items:center;text-align:center;padding:16px 8px;border:1px solid var(--line);border-radius:12px}
+.bcell svg{width:72px;height:72px;display:block}
+.panel .bcell svg{width:100%;height:auto}
+.bcell b{margin-top:8px;font-size:14px;line-height:20px;font-weight:500;color:var(--aw-ink-950)}
+.bcell span{font-size:12px;line-height:16px;color:var(--mute)}
+.bcell.next{border-style:dashed;border-color:var(--aw-blue-150);background:#fbfcff}
+.bcell.lock svg{opacity:.45}
+
+/* Drawers */
+.scrim{position:fixed;inset:0;z-index:60;background:rgba(2,10,29,.32);opacity:0;visibility:hidden;transition:.3s}
+.scrim.open{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:61;width:min(460px,100%);display:flex;flex-direction:column;background:#fff;box-shadow:-20px 0 60px -20px rgba(2,10,29,.25);transform:translateX(100%);transition:transform .4s var(--ease)}
+.drawer.open{transform:none}
+.dh{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:24px 24px 16px;border-bottom:1px solid var(--line)}
+.dh h2{font-size:24px;line-height:32px;font-weight:500;color:var(--aw-ink-950)}
+.dh p{font-size:14px;color:var(--mute)}
+.x{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;flex-shrink:0}
+.tabs{display:flex;gap:4px;padding:12px 24px 0}
+.tabs button{height:40px;padding:0 14px;border-radius:8px;font-size:16px;font-weight:500;color:var(--mute)}
+.tabs button[aria-selected="true"]{background:#f1f4f9;color:var(--q)}
+.tabs span{margin-left:4px;font-size:14px;font-weight:400;color:var(--mute)}
+.db{flex:1;overflow-y:auto;padding:16px 24px 32px}
+.acc{margin-bottom:8px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.acc>button{width:100%;display:flex;align-items:center;gap:12px;padding:12px 14px;text-align:left}
+.acc .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:#f3f5f9;color:var(--q);flex-shrink:0}
+.acc.done .ic{background:var(--mint);color:var(--green)}
+.acc .tx b{display:block;font-size:16px;line-height:22px;font-weight:500;color:var(--aw-ink-950)}
+.acc .tx span{font-size:14px;color:var(--mute)}
+.acc .chev{margin-left:auto;transition:transform .3s}
+.acc.open .chev{transform:rotate(180deg)}
+.acc.lock{opacity:.55}
+.pnl{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s var(--ease)}
+.acc.open .pnl{grid-template-rows:1fr}
+.pnl>div{overflow:hidden}
+.qchips{display:flex;flex-wrap:wrap;gap:6px;padding:4px 14px 14px}
+.qc{min-width:40px;height:40px;padding:0 8px;border-radius:8px;border:1px solid var(--line);display:grid;place-items:center;font-size:14px;font-weight:500;color:var(--q)}
+.qc.a{background:var(--mint);border-color:#bfe9d6;color:#0d6e49}
+.qc.c{border:2px solid var(--q)}
+.qc:disabled{background:#f7f8fa;color:#b8bfcc}
+.qc svg.i{width:14px;height:14px}
+.fl{display:flex;flex-direction:column;gap:12px}
+.fcard{padding:16px 18px;border:1px solid var(--line);border-left:4px solid var(--c);border-radius:12px}
+.fcard .k{font-size:12px;line-height:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.fcard h3{margin-top:4px;font-size:16px;line-height:24px;font-weight:500;color:var(--aw-ink-950)}
+.fcard p{margin-top:4px;font-size:14px;line-height:20px;color:var(--aw-slate-600)}
+.empty{padding:32px 16px;text-align:center;font-size:16px;color:var(--mute)}
+
+/* Larger text */
+body.lg-text .qtitle{font-size:40px;line-height:48px}
+body.lg-text .opt{font-size:20px;line-height:28px}
+body.lg-text .qk-t{font-size:18px;line-height:28px}
+body.lg-text .qk-t{font-size:24px;line-height:32px}
+body.lg-text .cuec b,body.lg-text .cuec p,body.lg-text .cuec dl{font-size:16px;line-height:24px}
+body.lg-text .qhelp{font-size:18px;line-height:28px}
+
+/* Touch and accessibility */
+.sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+button,a{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.qtitle:focus{outline:none}
+.menu-btn,.back-m,.ttl .short{display:none}
+.back-m{align-items:center;justify-content:center;gap:6px;height:52px;padding:0 18px;border-radius:8px;background:#fff;border:1px solid var(--line);color:var(--q);font-size:16px;font-weight:500;flex-shrink:0}
+.back-m:disabled{opacity:.4}
+.back-m svg.i{width:20px;height:20px}
+.mrow{width:100%;display:flex;align-items:center;gap:14px;min-height:64px;padding:12px 2px;border-bottom:1px solid var(--line);text-align:left;font-size:18px;line-height:24px;color:var(--aw-ink-950)}
+.mrow:last-child{border-bottom:0}
+.mrow>span:not(.sw){flex:1}
+.mrow small{display:block;font-size:14px;line-height:20px;color:var(--mute)}
+.mrow svg.i{width:22px;height:22px;color:var(--q)}
+.mrow .sw{position:relative;width:52px;height:32px;border-radius:32px;background:#d3d9e5;flex-shrink:0;transition:background .2s}
+.mrow .sw::after{content:"";position:absolute;top:4px;left:4px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s var(--ease)}
+.mrow[aria-checked="true"] .sw{background:var(--green)}
+.mrow[aria-checked="true"] .sw::after{transform:translateX(20px)}
+.drawer.sheet{top:auto;left:0;width:100%;max-height:88dvh;border-radius:20px 20px 0 0;transform:translateY(100%)}
+.drawer.sheet.open{transform:none}
+.drawer.sheet .db{padding-top:4px}
+@media (hover:none){
+  .opt:not([aria-checked="true"]):hover{border-color:#e3e7ef}
+  .cta:hover,.arrow:hover{transform:none}
+  .ghost:hover,.pill.bdg:hover{background:#fff}
+}
+@media (pointer:coarse){.qc{min-width:44px;height:44px}.x{width:44px;height:44px}.ib{width:44px;height:44px}}
+
+/* Tablet */
+@media (max-width:1023px){
+  .segs{gap:4px;margin-top:30px}
+  .nm{display:none}
+  .cap{display:flex;justify-content:space-between;gap:12px;margin-top:10px;font-size:14px;line-height:20px;color:var(--mute)}
+  .cap b{color:var(--q);font-weight:500}
+  .pill.time{display:none}
+  .bin{padding:0 24px}
+  .bc{gap:20px}
+}
+
+/* Phone */
+@media (max-width:767px){
+  :root{--bar-h:76px}
+  .top .in{padding:calc(8px + env(safe-area-inset-top)) 16px 10px}
+  .hrow{display:grid;grid-template-columns:minmax(0,1fr) auto 44px;grid-template-areas:"t t m" "l p p";align-items:center;gap:0 8px}
+  .ttl,.hr{display:contents}
+  .ttl h1{grid-area:t;min-width:0;font-size:18px;line-height:24px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ttl .full{display:none}.ttl .short{display:inline}
+  .ttl p{grid-area:l;margin:0;font-size:12px;line-height:16px}
+  .pills{grid-area:p;justify-self:end;gap:6px}
+  .menu-btn{grid-area:m;justify-self:end;display:grid;place-items:center;width:44px;height:44px;margin-right:-10px;border-radius:12px;color:var(--q)}
+  .menu-btn svg.i{width:24px;height:24px}
+  .pct,.pill.sec{display:none}
+  .pill{height:32px;padding:0 10px}
+  .pill.bdg{position:relative}.pill.bdg::after{content:"";position:absolute;inset:-6px -2px}
+  .segs{margin-top:22px}
+  .cr{width:30px;height:30px;top:-25px}
+  .cr.up{display:none}.sg:last-child .cr.up{display:block}
+  .cap{margin-top:8px}
+  .stage{padding:28px 16px calc(var(--bar-h) + env(safe-area-inset-bottom) + 20px)}
+  .stage.center{padding-top:20px;padding-bottom:24px}
+  .qrow{grid-template-columns:1fr;margin-top:10px}
+  .arrow{display:none}
+  .qtitle{font-size:24px;line-height:32px}
+  body.lg-text .qtitle{font-size:32px;line-height:40px}
+  .opts,.ta{margin-top:24px}
+  .opt{min-height:56px;padding:14px 16px;font-size:18px;line-height:24px}
+  body.lg-text .opt{font-size:20px;line-height:28px}
+  .qk{gap:10px;margin-top:20px}
+  .qk-bar p{font-size:14px;line-height:20px}
+  .qk-q{padding:16px}
+  .qk-t{font-size:18px;line-height:26px;gap:10px;align-items:flex-start}
+  .qk-t .n{margin-top:-1px}
+  .opts.row{grid-template-columns:repeat(var(--m),minmax(0,1fr));padding-left:0;gap:8px;margin-top:12px}
+  .opts.row .opt{min-height:48px;gap:10px;padding:12px 14px;font-size:16px;line-height:22px}
+  .cue{margin-top:16px}
+  .cuec{padding:14px 16px}
+  .cuec b,.cuec p,.cuec dl{font-size:16px;line-height:24px}
+  .cuec dl{grid-template-columns:1fr;gap:0}
+  .cuec dd{margin-bottom:6px}
+  .bin{display:flex;align-items:center;gap:12px;padding:0 16px}
+  .bl,.bc{display:none}
+  .br{flex:1;gap:12px}
+  .back-m{display:inline-flex}
+  .br .cta{flex:1;min-width:0;height:52px;padding:0 20px}
+  .panel{padding:28px 20px;border-radius:16px}
+  .panel h2{font-size:28px;line-height:36px}
+  .panel .ip{font-size:16px;line-height:26px}
+  .facts{gap:6px}
+  .mech{grid-template-columns:repeat(2,1fr);gap:8px}
+  .mech div{padding:14px 10px}
+  .strip{gap:4px}.strip svg,.sth{width:30px;height:30px}
+  .ctas{flex-direction:column;align-items:stretch;gap:8px}
+  .ctas .cta{width:100%}
+  .ctas .save{align-self:center;padding:10px}
+  .panel .bgrid{grid-template-columns:repeat(5,1fr)}
+  .stats{gap:8px}.stats div{padding:12px 8px}.stats b{font-size:18px;line-height:24px}
+  .reward{padding:calc(var(--hdr-h) + 16px) 16px calc(24px + env(safe-area-inset-bottom))}
+  .bwrap{width:112px;height:112px;margin:16px 0 8px}
+  .lbl b{font-size:24px;line-height:32px}
+  .rfact{margin-top:16px;padding:20px}
+  .rfact h3{font-size:20px;line-height:28px}
+  .acts{width:100%;margin-top:20px;gap:6px}
+  .acts .cta{width:100%}
+  .acts .save{padding:10px}
+  .drawer{width:100%}
+  .dh{padding:calc(20px + env(safe-area-inset-top)) 20px 14px}
+  .drawer.sheet .dh{padding-top:20px}
+  .db{padding:16px 20px calc(32px + env(safe-area-inset-bottom))}
+  .toast{max-width:calc(100% - 32px);height:auto;min-height:44px;padding:10px 16px;white-space:normal}
+}
+@media (max-width:359px){
+  .ttl p .lw{display:none}
+  .pill{padding:0 8px}
+  .back-m{padding:0 14px}.back-m span{display:none}
+  .opts.row .opt{padding:12px 10px}
+}
+/* Phone held sideways */
+@media (max-height:520px) and (orientation:landscape){
+  :root{--bar-h:64px}
+  .top .in{padding:8px 24px 6px}
+  .ttl p,.pct,.cap,.nm{display:none}
+  .hrow{grid-template-areas:"t p m"!important;grid-template-columns:minmax(0,1fr) auto auto!important}
+  .segs{margin-top:20px}.cr{width:22px;height:22px;top:-18px}
+  .stage{padding-top:20px}
+  .qtitle{font-size:24px;line-height:32px}
+  .opts{margin-top:20px;gap:8px}.opt{min-height:48px;padding:10px 16px}
+  .cue{margin-top:12px}
+  .cta,.back-m{height:44px}
+  .reward{padding-top:calc(var(--hdr-h) + 8px)}
+  .bwrap{width:88px;height:88px;margin:8px 0}
+}
+@media (prefers-reduced-motion:reduce){
+  .world .ph{animation:none}.motes{display:none}
+  .rays{animation:none!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.15s!important}
+}
+</style>
+</head>
+<body>
+<div class="worlds" id="worlds" aria-hidden="true"></div>
+<div id="app"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="sr" id="sr" aria-live="polite"></div>
+<div class="jpop" id="jpop" role="dialog" aria-labelledby="jpT" inert></div>
+<div class="reward" id="reward" role="dialog" aria-modal="true" aria-labelledby="rwT"></div>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dTitle" inert></aside>
+
+<script>
+/* ---------- Icons (lucide) ---------- */
+const P = {
+  user:'<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  zap:'<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>',
+  moon:'<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
+  utensils:'<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
+  smile:'<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/>',
+  activity:'<path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/>',
+  droplet:'<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>',
+  heart:'<path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/>',
+  clipboard:'<rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/>',
+  lock:'<rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  x:'<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+  info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
+  bulb:'<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>',
+  left:'<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  right:'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  grid:'<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>',
+  exit:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/>',
+  type:'<polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/>',
+  vol:'<path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/>',
+  mute:'<path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/>',
+  chev:'<path d="m6 9 6 6 6-6"/>',
+  minus:'<path d="M5 12h14"/>',
+  plus:'<path d="M5 12h14"/><path d="M12 5v14"/>',
+  rotate:'<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
+  star:'<path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>',
+  wine:'<path d="M8 22h8"/><path d="M7 10h10"/><path d="M12 15v7"/><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z"/>',
+  cig:'<path d="M17 12H3a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h14"/><path d="M18 8c0-2.5-2-2.5-2-5"/><path d="M21 16a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M22 8c0-2.5-2-2.5-2-5"/><path d="M7 12v4"/>',
+  candy:'<path d="M10 7v10.9"/><path d="M14 6.1V17"/><path d="M16 7V3a1 1 0 0 1 1.707-.707 2.5 2.5 0 0 0 2.152.717 1 1 0 0 1 1.131 1.131 2.5 2.5 0 0 0 .717 2.152A1 1 0 0 1 21 8h-4"/><path d="M16.536 7.465a5 5 0 0 0-7.072 0l-2 2a5 5 0 0 0 0 7.07 5 5 0 0 0 7.072 0l2-2a5 5 0 0 0 0-7.07"/><path d="M8 17v4a1 1 0 0 1-1.707.707 2.5 2.5 0 0 0-2.152-.717 1 1 0 0 1-1.131-1.131 2.5 2.5 0 0 0-.717-2.152A1 1 0 0 1 3 16h4"/>',
+  soda:'<path d="m6 8 1.75 12.28a2 2 0 0 0 2 1.72h4.54a2 2 0 0 0 2-1.72L18 8"/><path d="M5 8h14"/><path d="M7 15a6.47 6.47 0 0 1 5 0 6.47 6.47 0 0 0 5 0"/><path d="m12 8 1-6h2"/>',
+  coffee:'<path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/>',
+  pizza:'<path d="m12 14-1 1"/><path d="m13.75 18.25-1.25 1.42"/><path d="M17.775 5.654a15.68 15.68 0 0 0-12.121 12.12"/><path d="M18.8 9.3a1 1 0 0 0 2.1 7.7"/><path d="M21.964 20.732a1 1 0 0 1-1.232 1.232l-18-5a1 1 0 0 1-.695-1.232A19.68 19.68 0 0 1 15.732 2.037a1 1 0 0 1 1.232.695z"/>',
+  cookie:'<path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/><path d="M11 17v.01"/><path d="M7 14v.01"/>',
+  pill:'<path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
+  fish:'<path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6Z"/><path d="M18 12v.5"/><path d="M16 17.93a9.77 9.77 0 0 1 0-11.86"/><path d="M7 10.67C7 8 5.58 5.97 2.73 5.5c-1 1.5-1 5 .23 6.5-1.24 1.5-1.24 5-.23 6.5C5.58 18.03 7 16 7 13.33"/>',
+  leaf:'<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+  bed:'<path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/>',
+  sparkles:'<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>'
+};
+const ic = (n, cls='') => `<svg class="i ${cls}" viewBox="0 0 24 24" aria-hidden="true">${P[n]}</svg>`;
+const star = n => `<svg viewBox="0 0 24 24" style="width:${n}px;height:${n}px;fill:currentColor;flex-shrink:0" aria-hidden="true">${P.star}</svg>`;
+const tickSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+
+/* ---------- Egg to butterfly stages (drawn art) ---------- */
+let gid = 0;
+const INK='#2c4278', BODY='#8fefca', SHELL='#eff4ff', TEAL='#0abfa3', B3='#8098d1';
+const sw = 'stroke="'+INK+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"';
+const LEAF = `<path d="M8 64C24 52 56 52 72 64C56 74 24 74 8 64Z" fill="#edfcf7" stroke="#169d69" stroke-width="2" stroke-linejoin="round"/><path d="M15 64H65" stroke="#169d69" stroke-width="1.5" opacity=".45"/>`;
+const TWIG = `<path d="M10 12H70" stroke="#58637e" stroke-width="3" stroke-linecap="round"/><path d="M54 12l6-6" stroke="#58637e" stroke-width="2.4" stroke-linecap="round"/>`;
+const seg = (x,y,r=6) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${BODY}" ${sw}/><circle cx="${x}" cy="${y-1}" r="1.5" fill="${TEAL}"/>`;
+const head = (x,y,r=7.5) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${BODY}" ${sw}/><circle cx="${x-2.6}" cy="${y-1}" r="1.3" fill="${INK}"/><circle cx="${x+2.6}" cy="${y-1}" r="1.3" fill="${INK}"/><path d="M${x-3} ${y-r+1}l-2-5M${x+3} ${y-r+1}l2-5" ${sw} stroke-width="1.7" fill="none"/>`;
+const POD = 'M40 18C50 25 53 42 47 56C45 61 35 61 33 56C27 42 30 25 40 18Z';
+/* Stage art: life-stage sprites (assets/stages/s0 to s9) and matching badges (b0 to b9) */
+const stageArt = i => `<img class="stg" src="assets/stages/s${i}.png?v=1" alt="" draggable="false" decoding="async">`;
+const stageBadge = (i, mode='') => `<img class="sbadge ${mode}" src="assets/stages/b${i}.png?v=1" alt="" draggable="false" decoding="async">`;
+for (let k=0;k<10;k++) { new Image().src = `assets/stages/s${k}.png?v=1`; new Image().src = `assets/stages/b${k}.png?v=1`; }
+const STAGES = [
+  {n:'Egg',               d:'Every transformation starts small.'},
+  {n:'Hatchling',         d:'You’ve broken through the shell.'},
+  {n:'Caterpillar',       d:'Steady progress, one answer at a time.'},
+  {n:'Growing Caterpillar',d:'Your picture is filling out nicely.'},
+  {n:'Spinning',          d:'Almost halfway. Keep going.'},
+  {n:'Chrysalis',         d:'The quiet work happens here.'},
+  {n:'Transforming',      d:'Real change is underway.'},
+  {n:'Emerging',          d:'Nearly ready to break out.'},
+  {n:'Wings Unfolding',   d:'One final section to go.'},
+  {n:'Butterfly',         d:'Your full picture is complete.'}
+];
+
+/* ---------- Content ---------- */
+const ASSESSMENT = 'Adrenal, Pituitary, Thyroid & Endocrine Assessment';
+const SECONDS_PER_Q = 12;
+
+const SECTIONS = [
+  {id:'about',  name:'About You',             icon:'user',      insight:'Personal baseline',       why:'A little background helps your doctor read every other answer in the right context.'},
+  {id:'energy', name:'Energy & Fatigue',      icon:'zap',       insight:'Energy pattern',          why:'Energy levels often reflect how your thyroid, adrenal glands and blood sugar are working together.'},
+  {id:'sleep',  name:'Sleep & Recovery',      icon:'moon',      insight:'Sleep & recovery profile',why:'Sleep is when your body repairs and rebalances hormones. Disrupted sleep is often an early signal.'},
+  {id:'diet',   name:'Diet & Digestion',      icon:'utensils',  insight:'Nutrition & gut snapshot',why:'What and when you eat affects blood sugar, energy, mood and hormone production.'},
+  {id:'stress', name:'Stress & Mood',         icon:'smile',     insight:'Stress response map',     why:'Long-term stress changes how your adrenal glands release cortisol, which affects almost every system.'},
+  {id:'hormone',name:'Hormonal Health',       icon:'activity',  insight:'Hormone balance view',    why:'Hormones shift naturally with age. Your symptoms help us see which changes may need attention.'},
+  {id:'metab',  name:'Metabolic Health',      icon:'droplet',   insight:'Metabolic marker',        why:'Metabolic health shapes your long-term risk of diabetes and heart disease, and is very responsive to care.'},
+  {id:'life',   name:'Movement & Lifestyle',  icon:'heart',     insight:'Lifestyle rhythm',        why:'Daily habits are often the most powerful and practical place to start making changes.'},
+  {id:'history',name:'Medical History',       icon:'clipboard', insight:'Clinical history',        why:'Your history helps your doctor recommend options that are safe and appropriate for you.'}
+];
+
+const CUE = {
+  'energy crash':['A sudden drop in energy, often a few hours after eating, that can leave you sleepy, foggy or craving sugar.','It can point to how well your body is managing blood sugar through the day.'],
+  'brain fog':['Feeling mentally slow or cloudy, forgetting words, losing your train of thought or struggling to concentrate.','It is common with thyroid changes, poor sleep and hormonal shifts in midlife.'],
+  'tired but wired':['Feeling exhausted, yet your mind feels alert or restless when you try to rest or sleep.','This pattern can suggest your stress hormones are active at the wrong time of day.'],
+  'circadian rhythm':['Your body’s internal 24-hour clock. It tells you when to feel alert and when to feel sleepy.','Regular timing of light, meals and sleep keeps this clock, and many hormones, on track.'],
+  'sleep apnoea':['A condition where breathing repeatedly stops and starts during sleep, often with loud snoring.','It is under-diagnosed, affects energy and blood pressure, and is very treatable.'],
+  'night sweats':['Episodes of heavy sweating during sleep that can soak your nightclothes or bedding.','They are often linked to hormonal changes, but can have other causes worth reviewing.'],
+  'processed foods':['Foods made in a factory with added sugar, salt, fat or preservatives, such as ready meals, crisps, sweets and many breakfast cereals.','These can affect blood sugar and inflammation more than whole foods.'],
+  'blood sugar dip':['When the level of sugar (glucose) in your blood falls lower than your body likes, often between meals.','Shakiness or irritability when hungry can be an early sign of blood sugar imbalance.'],
+  'bloating':['A feeling of fullness, tightness or swelling in your stomach, sometimes with visible swelling.','Frequent bloating can signal digestive or hormonal factors worth exploring.'],
+  'reflux':['When stomach acid flows back up into your food pipe, causing a burning feeling in the chest or a sour taste.','It can affect sleep, nutrient absorption and comfort after meals.'],
+  'palpitations':['Being suddenly aware of your heartbeat, it may feel fast, pounding, fluttering or irregular.','They can be linked to stress, caffeine or thyroid activity. Seek urgent care if you also feel faint or have chest pain.'],
+  'cortisol':['Your main stress hormone, made by your adrenal glands. It helps you wake up, respond to pressure and control inflammation.','Too much or too little at the wrong times can affect sleep, weight, mood and energy.'],
+  'adrenal glands':['Two small glands that sit on top of your kidneys. They make hormones such as cortisol and adrenaline.','They help regulate blood pressure, salt balance and your response to stress.'],
+  'libido':['Your sex drive, or interest in sexual activity.','Changes are common with age and hormonal shifts. Your answer is confidential and helps your doctor.'],
+  'hot flushes':['A sudden feeling of heat in your face, neck or chest, often with redness and sweating.','They are most often linked to changing hormone levels during midlife.'],
+  'cold intolerance':['Feeling cold when others are comfortable, especially in your hands and feet.','It can be a sign that your thyroid is working more slowly.'],
+  'thyroid':['A butterfly-shaped gland at the front of your neck. It controls how quickly your body uses energy, your metabolism.','An underactive or overactive thyroid can affect weight, mood, energy and temperature.'],
+  'perimenopause':['The years leading up to menopause, when hormone levels begin to fluctuate. It often starts in your 40s.','Symptoms can include irregular periods, hot flushes, poor sleep and mood changes.'],
+  'andropause':['A gradual fall in testosterone levels in men, usually from around the age of 40.','It can affect energy, strength, mood and sexual health.'],
+  'hormone therapy':['Treatment that replaces or balances hormones, such as HRT, testosterone or thyroid medication.','Knowing what you already take helps your doctor plan safely.'],
+  'HbA1c':['A blood test that shows your average blood sugar level over the past two to three months.','It is commonly used to check for prediabetes and diabetes.'],
+  'waist measurement':['The distance around your middle, measured at the level of your belly button.','Fat stored around the waist is more closely linked to metabolic risk than overall weight.'],
+  'insulin resistance':['When your body’s cells respond less well to insulin, the hormone that moves sugar from your blood into your cells.','It can develop for years before blood tests look abnormal, and often improves with the right support.'],
+  'resistance training':['Exercise that makes your muscles work against a weight or force, such as weights, bands, or body-weight moves like squats.','It protects muscle, bone and blood sugar control as you age.'],
+  'autoimmune condition':['A condition where the immune system mistakenly attacks the body’s own tissues, for example Hashimoto’s, rheumatoid arthritis or coeliac disease.','Several autoimmune conditions affect hormone glands directly.'],
+  'endocrine':['The system of glands that make hormones, including your thyroid, adrenal and pituitary glands, pancreas and ovaries or testes.','Endocrine conditions often run in families.']
+};
+
+const FREQ = [['Never','Not at all'],['Rarely','Once a month or less'],['Sometimes','A few times a month'],['Often','Most weeks'],['Always','Every day or nearly every day']];
+const f = (s,t) => ({s,t,k:'freq'});
+const one = (s,t,o,x={}) => ({s,t,k:'single',o,...x});
+const many = (s,t,o,x={}) => ({s,t,k:'multi',o,...x});
+const sc = (s,t,lo,hi) => ({s,t,k:'scale',lo,hi});
+const nm = (s,t,min,max,step,unit,def) => ({s,t,k:'number',min,max,step,unit,def});
+const YNU = ['Yes','No','Not sure'];
+
+const Q = [
+  /* About you, 8 */
+  one('about','What is your age range?',['40 to 44','45 to 49','50 to 54','55 to 59','60 to 64','65 to 69','70 or over']),
+  one('about','What sex were you assigned at birth?',['Female','Male','Prefer not to say'],{help:'This helps us show you the right hormone questions later.'}),
+  one('about','How would you describe your overall health right now?',['Excellent','Good','Fair','Poor']),
+  one('about','How has your weight changed in the last 12 months?',['Gained more than 5 kg','Gained a little','Stayed about the same','Lost a little','Lost more than 5 kg']),
+  many('about','What would you most like to improve?',['More energy','Better sleep','Weight management','Mood and focus','Hormonal balance','Healthy ageing','Something else'],{help:'Choose all that apply.'}),
+  one('about','How long have you been feeling not quite yourself?',['Less than 3 months','3 to 12 months','1 to 3 years','More than 3 years','I feel well, I’m just checking']),
+  one('about','Have recent blood tests come back “normal” even though you don’t feel well?',['Yes','No','I haven’t had recent tests','Not sure']),
+  one('about','How many hours a week do you work, including caring for others?',['Under 20 hours','20 to 40 hours','40 to 55 hours','Over 55 hours','Retired or not working']),
+  /* Energy, 12 */
+  sc('energy','How would you rate your energy on a typical day?','Very low','Very high'),
+  f('energy','Do you feel tired even after a full night’s sleep?'),
+  f('energy','Do you have an {energy crash|energy crash} in the mid-afternoon?'),
+  f('energy','Do you rely on caffeine or sugar to get through the day?'),
+  f('energy','Do you experience {brain fog|brain fog}?'),
+  f('energy','Do you feel exhausted after light physical activity?'),
+  f('energy','Do you find it hard to get going in the morning?'),
+  f('energy','Do you feel {tired but wired|tired but wired} in the evening?'),
+  one('energy','Has your stamina changed compared with five years ago?',['Much lower','A little lower','About the same','It has improved']),
+  f('energy','Do you feel the need to nap during the day?'),
+  f('energy','Do your muscles feel weak or heavy?'),
+  nm('energy','How many caffeinated drinks do you have per day?',0,12,1,'drinks per day',2),
+  /* Sleep, 12 */
+  nm('sleep','On average, how many hours do you sleep per night?',3,12,0.5,'hours per night',7),
+  one('sleep','How long does it usually take you to fall asleep?',['Less than 15 minutes','15 to 30 minutes','30 to 60 minutes','More than an hour']),
+  f('sleep','Do you wake during the night and struggle to fall back asleep?'),
+  f('sleep','Do you regularly wake between 1am and 4am?',),
+  f('sleep','Do you wake up feeling refreshed?'),
+  one('sleep','Has anyone said you snore loudly or stop breathing during sleep? This can be a sign of {sleep apnoea|sleep apnoea}.',['Yes','No','Not sure','I sleep alone']),
+  f('sleep','Do you experience {night sweats|night sweats}?'),
+  f('sleep','Do you use a phone, tablet or TV in the hour before bed?'),
+  one('sleep','How regular is your sleep schedule, including weekends? This shapes your {circadian rhythm|circadian rhythm}.',['Very regular','Mostly regular','Irregular','Very irregular']),
+  many('sleep','Do you take anything to help you sleep?',['Prescription medication','Melatonin','Herbal supplements','Alcohol','Nothing'],{help:'Choose all that apply.'}),
+  f('sleep','Do you get restless or uncomfortable legs in the evening?'),
+  sc('sleep','How would you rate your overall sleep quality?','Very poor','Excellent'),
+  /* Diet, 14 */
+  one('diet','How many meals do you eat on a typical day?',['1','2','3','More than 3','It varies a lot']),
+  f('diet','How often do you eat {processed foods|processed foods}?'),
+  one('diet','How many portions of vegetables and fruit do you eat each day?',['0 to 1','2 to 3','4 to 5','6 or more'],{help:'One portion is about a handful.'}),
+  f('diet','Do you crave sugar or starchy foods like bread and pasta?'),
+  f('diet','Do you feel shaky, irritable or light-headed if you miss a meal? This may be a {blood sugar dip|blood sugar dip}.'),
+  f('diet','Do you experience {bloating|bloating} after meals?'),
+  f('diet','Do you experience heartburn or {reflux|reflux}?'),
+  one('diet','How often do you open your bowels?',['More than twice a day','Once or twice a day','Every 2 to 3 days','Less often than every 3 days']),
+  one('diet','Do you notice certain foods make you feel unwell?',['Yes, often','Sometimes','Rarely','Never']),
+  nm('diet','How many glasses of water do you drink per day?',0,15,1,'glasses per day',5),
+  one('diet','How many alcoholic drinks do you have in a typical week?',['None','1 to 7','8 to 14','15 or more']),
+  many('diet','Do you follow any particular way of eating?',['Vegetarian','Vegan','Low carb or keto','Gluten-free','Intermittent fasting','Mediterranean','No particular diet'],{help:'Choose all that apply.'}),
+  f('diet','Do you feel full quickly or lose your appetite?'),
+  f('diet','Do you eat within two hours of going to bed?'),
+  /* Stress, 12 */
+  sc('stress','How would you rate your stress over the past month?','Very low','Very high'),
+  f('stress','Do you feel overwhelmed by everyday tasks?'),
+  f('stress','Do you feel anxious or on edge?'),
+  one('stress','Do you feel low, flat or lose interest in things you used to enjoy?',[...FREQ.map(x=>x[0]),'Prefer not to say'],{help:'If you are struggling right now, please speak to your GP or a local support line, you don’t have to wait for your results.'}),
+  f('stress','Do you feel irritable or short-tempered?'),
+  f('stress','Do you find it hard to switch off and relax?'),
+  f('stress','Do you notice {palpitations|palpitations} when you are stressed?'),
+  many('stress','Have you been through any of these in the past two years?',['Bereavement','Divorce or separation','Job change or retirement','Caring for a family member','Serious illness','Moving home','None of these'],{help:'Choose all that apply.'}),
+  f('stress','Does your stress response feel “stuck on”, as if your {cortisol|cortisol} never settles?'),
+  f('stress','Do you crave salty foods? This can relate to your {adrenal glands|adrenal glands}.'),
+  f('stress','Do you feel light-headed when you stand up quickly?'),
+  one('stress','How well do you cope with pressure compared with the past?',['Better than before','About the same','A little worse','Much worse']),
+  /* Hormonal, 14 */
+  one('hormone','Have you noticed a change in your {libido|libido}?',['Significant decrease','Slight decrease','No change','Increase','Prefer not to say']),
+  f('hormone','Do you experience {hot flushes|hot flushes}?'),
+  f('hormone','Do you feel unusually cold, especially in your hands and feet? This is called {cold intolerance|cold intolerance}.'),
+  f('hormone','Have you noticed thinning hair or hair loss?'),
+  f('hormone','Is your skin drier than it used to be?'),
+  f('hormone','Have you noticed puffiness in your face or around your eyes?'),
+  f('hormone','Do you have joint aches or stiffness?'),
+  one('hormone','Have you gained weight around your middle without changing how you eat?',['Yes, a lot','Yes, a little','No','Not sure']),
+  f('hormone','Do you notice mood changes linked to your monthly cycle or life stage?'),
+  one('hormone','For women: which best describes your periods? You may be in {perimenopause|perimenopause}.',['Regular cycles','Irregular cycles','Perimenopause','After menopause','Not applicable','Prefer not to say']),
+  one('hormone','For men: have you noticed reduced strength or morning erections? This can relate to {andropause|andropause}.',[...FREQ.map(x=>x[0]),'Not applicable','Prefer not to say']),
+  one('hormone','Are you currently using any {hormone therapy|hormone therapy}?',['Yes','No','In the past','Not sure']),
+  f('hormone','Do you feel your heart racing, or feel hot and jittery for no clear reason?'),
+  one('hormone','Has a doctor ever mentioned your {thyroid|thyroid}?',['Yes, underactive','Yes, overactive','Yes, something else','No','Not sure']),
+  /* Metabolic, 10 */
+  one('metab','Does anyone in your close family have diabetes?',YNU),
+  one('metab','Has a doctor told you your blood sugar or {HbA1c|HbA1c} is raised?',['Yes','No','Not sure','Never been tested']),
+  f('metab','Do you feel very thirsty or need to pass urine often?'),
+  f('metab','Do you feel sleepy after meals?'),
+  one('metab','Has your {waist measurement|waist measurement} increased in the past few years?',['Yes, a lot','A little','No','I don’t know']),
+  one('metab','Has a doctor mentioned high blood pressure?',YNU),
+  one('metab','Has a doctor mentioned high cholesterol?',YNU),
+  f('metab','Do cuts or bruises take longer to heal than they used to?'),
+  one('metab','Have you noticed darker, velvety patches of skin on your neck or underarms? This can be a sign of {insulin resistance|insulin resistance}.',YNU),
+  f('metab','Do you find it hard to lose weight, even when you try?'),
+  /* Lifestyle, 12 */
+  nm('life','How many days a week are you active for 30 minutes or more?',0,7,1,'days per week',3),
+  one('life','Do you do any {resistance training|resistance training}?',['Never','Occasionally','1 to 2 times a week','3 or more times a week']),
+  one('life','How many hours a day do you spend sitting?',['Less than 4','4 to 6','6 to 9','More than 9']),
+  one('life','About how many steps do you walk on a typical day?',['Under 3,000','3,000 to 6,000','6,000 to 10,000','Over 10,000','I don’t know']),
+  f('life','Do you spend time outdoors in daylight?'),
+  one('life','Do you smoke or vape?',['Never','I used to','Occasionally','Daily']),
+  f('life','Do you feel connected to friends, family or community?'),
+  f('life','Do you have time for hobbies or activities you enjoy?'),
+  f('life','Do you practise anything to relax, such as breathing exercises, meditation or prayer?'),
+  f('life','Do you have pain that limits what you can do?'),
+  sc('life','How would you rate your balance and mobility?','Very poor','Excellent'),
+  sc('life','How ready do you feel to make changes to your health?','Not ready','Very ready'),
+  /* History, 8 */
+  many('history','Have you been diagnosed with any of these?',['Diabetes','Thyroid condition','High blood pressure','Heart condition','Autoimmune condition','Depression or anxiety','Osteoporosis','None of these'],{help:'Choose all that apply. Not sure what an {autoimmune condition|autoimmune condition} is?'}),
+  one('history','Are you currently taking any prescription medicines?',['Yes','No']),
+  many('history','Do you take any supplements or vitamins?',['Vitamin D','Magnesium','Omega-3','Multivitamin','Iron','B vitamins','Other','None'],{help:'Choose all that apply.'}),
+  one('history','Have you had surgery in the past five years?',['Yes','No']),
+  one('history','Are you allergic to any medicines?',YNU),
+  one('history','Does a close family member have a hormone or {endocrine|endocrine} condition?',YNU),
+  one('history','When did you last have a full health check with blood tests?',['Within 6 months','6 to 12 months ago','1 to 3 years ago','More than 3 years ago','Never']),
+  {s:'history',t:'Is there anything else you would like your doctor to know?',k:'text',opt:true,help:'Optional. You can skip this question.'}
+];
+
+
+
+
+Object.assign(P, {
+  compass:'<path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/><circle cx="12" cy="12" r="10"/>',
+  waves:'<path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>',
+  scale:'<path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>',
+  flame:'<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
+  mountain:'<path d="m8 3 4 8 5-5 5 15H2L8 3z"/>',
+  book:'<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',
+  list:'<path d="M3 12h.01"/><path d="M3 18h.01"/><path d="M3 6h.01"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M8 6h13"/>',
+  chevL:'<path d="m15 18-6-6 6-6"/>', chevR:'<path d="m9 18 6-6-6-6"/>',
+  help:'<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>',
+  award:'<path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/>',
+  map:'<path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/>',
+  apple:'<path d="M12 6.528V3a1 1 0 0 1 1-1h0"/><path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21"/>',
+  molecule:'<circle cx="6" cy="7" r="2.5"/><circle cx="18" cy="7" r="2.5"/><circle cx="12" cy="17.5" r="2.5"/><path d="M8.5 7h7"/><path d="m7.3 9.2 3.4 6.1"/><path d="m16.7 9.2-3.4 6.1"/>',
+  footprints:'<path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/>',
+  menu:'<path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/>',
+  coins:'<circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/>'
+});
+
+/* ---------- A few quick ones: several short questions on one screen ---------- */
+const GOPTS = [['None','Do not consume or use'],['2 to 3 times monthly','Consume or use 2 to 3 times monthly'],['Weekly','Consume or use weekly'],['Daily','Consume or use daily']];
+const YN3 = YNU.map(x => [x, '']);
+const idxOf = t => { const k = Q.findIndex(q => q.k!=='quick' && q.t.includes(t)); if (k<0) throw new Error('Missing question: '+t); return k; };
+function quick({s, opts, take=[], after, rows, help, all=0, allLabel}) {
+  const taken = take.map(t => Q[idxOf(t)]);
+  const anchor = after ? Q[idxOf(after)] : taken[0];
+  Q.splice(Q.indexOf(anchor) + (after?1:0), 0, {s, k:'quick', t:'A few quick ones', opts, rows: rows || taken.map(q=>q.t), help, all, allLabel});
+  taken.forEach(q => Q.splice(Q.indexOf(q), 1));
+}
+quick({s:'energy', opts:FREQ, allLabel:'Never, for all of these', take:['exhausted after light physical activity','need to nap during the day','muscles feel weak or heavy']});
+quick({s:'diet', opts:GOPTS, allLabel:'None of these', after:'portions of vegetables and fruit',
+  take:['How often do you eat {processed foods','alcoholic drinks do you have','Do you smoke or vape','caffeinated drinks do you have'],
+  rows:['How often do you drink alcohol?','How often do you smoke, vape or use tobacco?','How often do you eat sweets or candy?','How often do you have sugary or fizzy drinks?','How often do you have coffee or energy drinks?','How often do you eat fast food or takeaways?','How often do you eat crisps or other {processed snacks|processed foods}?']});
+quick({s:'hormone', opts:FREQ, allLabel:'Never, for all of these', take:['thinning hair or hair loss','skin drier than it used to be','puffiness in your face','joint aches or stiffness']});
+quick({s:'metab', opts:YN3, all:1, allLabel:'No to all of these', take:['close family have diabetes','mentioned high blood pressure','mentioned high cholesterol']});
+quick({s:'history', opts:YN3, all:1, allLabel:'No to all of these', take:['currently taking any prescription medicines','surgery in the past five years','allergic to any medicines','hormone or {endocrine']});
+quick({s:'history', opts:GOPTS, allLabel:'None of these', help:'Include anything bought without a prescription.',
+  take:['take any supplements or vitamins','take anything to help you sleep'],
+  rows:['How often do you take vitamin D?','How often do you take magnesium?','How often do you take omega-3 or fish oil?','How often do you take a multivitamin?','How often do you use sleep aids or melatonin?','How often do you take pain relief medicine?']});
+
+/* Every question uses the same answer cards: number steppers and 1 to 5 scales become options */
+const NUMS = {
+  'hours do you sleep per night':['Less than 5 hours','5 to 6 hours','6 to 7 hours','7 to 8 hours','More than 8 hours'],
+  'glasses of water':['0 to 2 glasses','3 to 4 glasses','5 to 6 glasses','7 to 8 glasses','More than 8 glasses'],
+  'active for 30 minutes':['0 days','1 to 2 days','3 to 4 days','5 to 6 days','Every day']
+};
+const SCALES = {'Very low|Very high':['Very low','Low','Moderate','High','Very high'], 'Very poor|Excellent':['Very poor','Poor','Fair','Good','Excellent'], 'Not ready|Very ready':['Not ready','A little ready','Fairly ready','Ready','Very ready']};
+Q.forEach(q => {
+  if (q.k==='number') { const k = Object.keys(NUMS).find(x=>q.t.includes(x)); if (k) Object.assign(q, {k:'single', o:NUMS[k]}); }
+  if (q.k==='scale') Object.assign(q, {k:'single', o:SCALES[q.lo+'|'+q.hi]});
+});
+
+/* ---------- Model ---------- */
+Q.forEach((q,i) => { q.i=i; q.si=SECTIONS.findIndex(s=>s.id===q.s); q.u = q.k==='quick' ? q.rows.length : 1; });
+let acc = 0; Q.forEach(q => { q.n0 = acc+1; acc += q.u; });
+const TOTAL = acc;
+const SEC = SECTIONS.map((s,si) => { const qs = Q.filter(q=>q.si===si); return {...s, si, start:qs[0].i, end:qs[qs.length-1].i, units:qs.reduce((a,q)=>a+q.u,0)}; });
+const SHORT = {about:'About You',energy:'Energy',sleep:'Sleep',diet:'Diet',stress:'Stress & Mood',hormone:'Hormones',metab:'Metabolic',life:'Lifestyle',history:'History'};
+const XP = 1, MISSION = 2;   /* leaves: one for every answer, two bonus leaves for a quick round */
+
+/* ---------- Section scenes and badges ---------- */
+const TH = [
+  {id:'about',   badge:'About You',            icon:'user',       shape:'circle', a:'#8098d1', al:'#e9eefc', ad:'#47599c'},
+  {id:'energy',  badge:'Energy & Fatigue',     icon:'zap',        shape:'hex',    a:'#f5a524', al:'#fff1d2', ad:'#9a5b00'},
+  {id:'sleep',   badge:'Sleep & Recovery',     icon:'moon',       shape:'shield', a:'#7b83e0', al:'#eaebff', ad:'#454ba8'},
+  {id:'diet',    badge:'Diet & Digestion',     icon:'apple',      shape:'leaf',   a:'#169d69', al:'#e3f8ee', ad:'#0d7a50'},
+  {id:'stress',  badge:'Stress & Mood',        icon:'smile',      shape:'drop',   a:'#0abfa3', al:'#dcf8f3', ad:'#04705f'},
+  {id:'hormone', badge:'Hormonal Health',      icon:'molecule',   shape:'flower', a:'#e57f97', al:'#ffe9ee', ad:'#a8475f'},
+  {id:'metab',   badge:'Metabolic Health',     icon:'droplet',    shape:'oct',    a:'#ec8a55', al:'#ffecdf', ad:'#a3501f'},
+  {id:'life',    badge:'Movement & Lifestyle', icon:'footprints', shape:'pent',   a:'#3d9be0', al:'#e2f1fd', ad:'#1d64a0'},
+  {id:'history', badge:'Medical History',      icon:'clipboard',  shape:'plaque', a:'#c79a3e', al:'#f8efd9', ad:'#80601c'}
+];
+const TH_FINAL = {id:'about', a:'#169d69', al:'#e3f8ee', ad:'#0d7a50'};
+
+const hex2 = h => [1,3,5].map(k=>parseInt(h.slice(k,k+2),16));
+const mix = (h, w, t) => { const a=hex2(h), b=hex2(w); return '#'+a.map((v,k)=>Math.round(v+(b[k]-v)*t).toString(16).padStart(2,'0')).join(''); };
+const poly = (n, r, rot) => 'M'+Array.from({length:n},(_,k)=>{ const a=(rot+k*360/n)*Math.PI/180; return `${(60+r*Math.cos(a)).toFixed(1)} ${(60+r*Math.sin(a)).toFixed(1)}`; }).join('L')+'Z';
+const SHAPES = {
+  circle:'M60 6A54 54 0 1 1 59.9 6Z',
+  hex:poly(6,56,-90),
+  shield:'M60 6C80 6 98 11 108 17V58C108 86 88 104 60 114C32 104 12 86 12 58V17C22 11 40 6 60 6Z',
+  leaf:poly(4,58,-90),
+  drop:'M60 4C72 24 104 46 104 74A44 44 0 0 1 16 74C16 46 48 24 60 4Z',
+  flower:'M'+Array.from({length:120},(_,k)=>{ const a=k/120*Math.PI*2, r=50+6*Math.cos(10*a); return `${(60+r*Math.cos(a)).toFixed(1)} ${(60+r*Math.sin(a)).toFixed(1)}`; }).join('L')+'Z',
+  oct:poly(8,56,-90+22.5),
+  pent:poly(5,58,-90),
+  plaque:'M30 10H90A20 20 0 0 1 110 30V90A20 20 0 0 1 90 110H30A20 20 0 0 1 10 90V30A20 20 0 0 1 30 10Z'
+};
+const inset = (d, s) => `<g transform="translate(60 60) scale(${s}) translate(-60 -60)">${d}</g>`;
+function badgeSVG(si, mode='full', stage=null) {
+  const t = TH[si], d = SHAPES[t.shape], id = 'b'+(++gid);
+  const art = stage==null ? '' : stageArt(stage).replace('<svg ', '<svg x="21" y="19" width="78" height="78" ');
+  const iconG = (col, sw, k=2.1) => `<g transform="translate(60 60) scale(${k}) translate(-12 -12)" fill="none" stroke="${col}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${P[t.icon]}</g>`;
+  if (mode !== 'full') {
+    const glowy = mode==='glow', lk = mode==='lock', rim = glowy ? '#fff' : lk ? '#d3d9e5' : '#e3e7ef', face = glowy ? '#fff' : lk ? '#eceff5' : '#f1f3f7';
+    const lock = mode==='lock' ? `<circle cx="92" cy="92" r="17" fill="#fff" stroke="#e3e7ef" stroke-width="2"/><g transform="translate(92 92) scale(1.05) translate(-12 -12)" fill="none" stroke="#7c8394" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${P.lock}</g>` : '';
+    return `<svg viewBox="-6 -6 132 132" class="badge ${mode}" aria-hidden="true"><path d="${d}" fill="${rim}" stroke="${rim}" stroke-width="8" stroke-linejoin="round"/>${inset(`<path d="${d}" fill="${face}"/>`, .82)}${glowy?'':art ? `<g style="filter:grayscale(1);opacity:.42">${art}</g>` : iconG(lk?'#a9b2c4':'#c5ccda',1.5)}${lock}</svg>`;
+  }
+  const l2 = mix(t.a,'#ffffff',.55), l1 = mix(t.a,'#ffffff', art ? .88 : .25), l0 = art ? mix(t.a,'#ffffff',.62) : t.a, d1 = mix(t.ad,'#000000',.1);
+  return `<svg viewBox="-6 -6 132 132" class="badge" aria-hidden="true"><defs>
+    <linearGradient id="${id}r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${l2}"/><stop offset=".45" stop-color="${t.a}"/><stop offset="1" stop-color="${d1}"/></linearGradient>
+    <radialGradient id="${id}e" cx=".38" cy=".3" r=".85"><stop offset="0" stop-color="${l1}"/><stop offset=".6" stop-color="${art ? mix(t.a,'#ffffff',.78) : t.a}"/><stop offset="1" stop-color="${l0===t.a ? t.ad : l0}"/></radialGradient>
+    <linearGradient id="${id}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="${id}s" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <clipPath id="${id}c">${inset(`<path d="${d}"/>`, .82)}</clipPath></defs>
+    <ellipse cx="60" cy="121" rx="34" ry="4" fill="#1b294b" opacity=".12"/>
+    <path d="${d}" fill="url(#${id}r)" stroke="url(#${id}r)" stroke-width="8" stroke-linejoin="round"/>
+    <path d="${d}" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.4"/>
+    ${inset(`<path d="${d}" fill="url(#${id}e)" stroke="${t.ad}" stroke-opacity=".35" stroke-width="2"/>`, .82)}
+    ${art || `<g transform="translate(1.2 2)" opacity=".45">${iconG(t.ad,1.7)}</g>${iconG('#fff',1.7)}`}
+    <g clip-path="url(#${id}c)"><ellipse cx="46" cy="28" rx="52" ry="30" fill="url(#${id}g)"/><g transform="rotate(20 60 60)"><rect class="shine" x="-110" y="-40" width="40" height="200" fill="url(#${id}s)"/></g></g>
+    <path d="M92 20l1.6 4.4L98 26l-4.4 1.6L92 32l-1.6-4.4L86 26l4.4-1.6Z" fill="#fff" opacity=".9"/></svg>`;
+}
+
+/* Scene art: assets/bg/<section>.jpg, soft clay game worlds kept low and hazy */
+const ASSET_V = 'v=1';   /* bump when the art changes so browsers fetch the new files */
+const BG = id => `assets/bg/${id}.jpg?${ASSET_V}`;
+[...TH, TH_FINAL].forEach(t => { const im = new Image(); im.src = BG(t.id); });
+function motes(seed) {
+  let s = seed*9301+49297; const r = () => ((s = (s*16807) % 2147483647) - 1) / 2147483646;
+  return `<div class="motes">${Array.from({length:10},(_,k)=>{ const left = k%2 ? 72+r()*26 : 2+r()*26;
+    return `<i style="left:${left.toFixed(1)}%;--z:${Math.round(4+r()*6)}px;--d:${Math.round(18+r()*14)}s;--dl:-${Math.round(r()*30)}s;--dx:${Math.round(-40+r()*80)}px"></i>`; }).join('')}</div>`;
+}
+
+/* ---------- Health discoveries (contextual, chosen from answers) ---------- */
+const findQ = t => Q.find(q => q.k!=='quick' && q.t.includes(t));
+const A = t => { const q = findQ(t); return q ? S.answers[q.i] : undefined; };
+const optIs = (t, ...L) => { const q = findQ(t); if (!q) return false; const v = S.answers[q.i]; return v!==undefined && L.includes(q.o[v]); };
+const AQ = t => { for (const q of Q) if (q.k==='quick') { const r = q.rows.findIndex(x=>x.includes(t)); if (r>=0) return (S.answers[q.i]||{})[r]; } };
+const FACTS = {
+  about:[
+    {id:'about-normal', when:()=>optIs('recent blood tests','Yes'), t:'Feeling unwell with normal results is common', b:'Standard blood test ranges are based on population averages. Many people feel unwell while their results sit inside those ranges, which is why your symptoms and history are read alongside the numbers.'},
+    {id:'about-40s', when:()=>optIs('age range','40 to 44','45 to 49'), t:'Hormones start shifting in your 40s', b:'Gradual changes in hormones such as oestrogen, progesterone and testosterone often begin in the early to mid 40s, sometimes years before any obvious milestone.'},
+    {id:'about-60s', when:()=>optIs('age range','60 to 64','65 to 69','70 or over'), t:'It is never too late to benefit', b:'Research on healthy ageing shows that better sleep, strength training, good nutrition and staying connected still make a real difference in your 60s, 70s and beyond.'},
+    {id:'about-hours', when:()=>optIs('hours a week do you work','Over 55 hours'), t:'Long weeks leave less room to recover', b:'Long working or caring weeks often squeeze sleep and downtime, which can show up as tiredness or poor focus. Seeing how your week is shaped helps your doctor give advice that fits real life.'},
+    {id:'about-base', t:'Context makes every answer clearer', b:'Your doctor reads each answer against your age, life stage and how you feel today. That context can turn a handful of separate symptoms into one clear picture.'}],
+  energy:[
+    {id:'energy-fog', when:()=>A('brain fog')>=3, t:'Brain fog is common in midlife', b:'Slower thinking or trouble finding words often appears with hormonal change, poor sleep or stress. It is a sign to look deeper, and it often improves once the cause is found.'},
+    {id:'energy-dip', when:()=>A('energy crash')>=3, t:'The afternoon dip is partly natural', b:'Your body clock creates a natural dip in alertness in the early afternoon. A large or sugary lunch can make that dip feel deeper.'},
+    {id:'energy-caff', when:()=>A('rely on caffeine')>=3, t:'Caffeine stays with you for hours', b:'It takes around five hours for your body to clear half the caffeine in a drink, so an afternoon coffee can still be working at bedtime.'},
+    {id:'energy-nap', when:()=>AQ('need to nap')>=3, t:'Short naps work best', b:'A nap of around 20 minutes tends to refresh you without grogginess. Long naps late in the day can make it harder to fall asleep at night.'},
+    {id:'energy-team', t:'Energy is a team effort', b:'Your thyroid, adrenal glands, blood sugar and sleep all shape how energetic you feel. Looking at them together often explains tiredness better than looking at any one alone.'}],
+  sleep:[
+    {id:'sleep-short', when:()=>optIs('hours do you sleep','Less than 5 hours','5 to 6 hours'), t:'Every extra half hour counts', b:'Sleep supports memory, learning and emotional balance. Consistently short sleep can affect many parts of everyday life, and even small, steady gains can help.'},
+    {id:'sleep-early', when:()=>A('between 1am and 4am')>=3, t:'Waking in the early hours is a useful clue', b:'Regular waking between 1am and 4am can be linked to stress hormones, blood sugar, alcohol or a warm bedroom. It is a helpful pattern for your doctor to know about.'},
+    {id:'sleep-sweats', when:()=>A('night sweats')>=3, t:'Night sweats can be eased', b:'Night sweats are often linked to hormonal change in midlife, and there are several effective ways to ease them. Your doctor will look at the full picture with you.'},
+    {id:'sleep-screens', when:()=>A('phone, tablet or TV')>=3, t:'Evening light tells your brain it is daytime', b:'Bright light from screens can delay melatonin, the hormone that helps you feel sleepy. Dimming screens for the last hour before bed can make falling asleep easier.'},
+    {id:'sleep-clock', when:()=>optIs('sleep schedule','Irregular','Very irregular'), t:'Your body clock loves routine', b:'Going to bed and waking at similar times, even at weekends, keeps your circadian rhythm steady, and many hormones follow that rhythm.'},
+    {id:'sleep-memory', t:'Sleep files away your day', b:'During deep sleep your brain replays and stores what you learned during the day. Sleep is also when your body repairs and rebalances many hormones.'}],
+  diet:[
+    {id:'diet-veg', when:()=>optIs('portions of vegetables','0 to 1','2 to 3'), t:'Fibre feeds your friendly gut bacteria', b:'Fibre supports healthy digestion and helps nourish beneficial gut bacteria. Beans, lentils, fruit, vegetables and whole grains are all useful sources.'},
+    {id:'diet-water', when:()=>optIs('glasses of water','0 to 2 glasses','3 to 4 glasses'), t:'Thirst can feel like tiredness', b:'Even mild dehydration can affect concentration and energy, and our sense of thirst tends to weaken a little with age. A glass of water with each meal is an easy habit.'},
+    {id:'diet-drinks', when:()=>AQ('sugary or fizzy')>=2, t:'Sugar in drinks acts fast', b:'Sugar in drinks reaches your bloodstream faster than sugar in whole foods, because there is no fibre to slow it down.'},
+    {id:'diet-alcohol', when:()=>AQ('drink alcohol')>=2, t:'Alcohol changes the second half of the night', b:'Alcohol can help you drift off, but it often makes sleep lighter and more broken in the early hours.'},
+    {id:'diet-late', when:()=>A('within two hours of going to bed')>=3, t:'Your gut keeps a body clock too', b:'Digestion slows down in the evening. Leaving a little time between your last meal and bed can make sleep more comfortable, especially if you get reflux.'},
+    {id:'diet-fibre', t:'Your gut is home to trillions of helpers', b:'Dietary fibre helps nourish the beneficial microorganisms in your gut, which play a part in digestion and immunity.'}],
+  stress:[
+    {id:'stress-connect', when:()=>{ const v=A('feel low, flat'); return v>=3 && v<=4; }, t:'Connection is good medicine', b:'Time with people you feel at ease with can lower stress and lift wellbeing. If things feel heavy right now, talking to your GP or someone you trust is a strong first step.'},
+    {id:'stress-breath', when:()=>A('hard to switch off')>=3, t:'A longer out-breath calms your body', b:'Breathing out slowly, for longer than you breathe in, activates the part of your nervous system that helps you rest and digest.'},
+    {id:'stress-life', when:()=>{ const q=findQ('in the past two years'), v=q&&S.answers[q.i]; return Array.isArray(v) && v.length>0 && !v.includes(q.o.indexOf('None of these')); }, t:'Big changes count, even good ones', b:'Major life events such as retirement, moving home or caring for someone can affect sleep, appetite and energy for months. Recognising them is a helpful first step.'},
+    {id:'stress-stand', when:()=>A('light-headed when you stand')>=3, t:'Take your time standing up', b:'Feeling light-headed when you stand can relate to blood pressure, fluids or how your adrenal system responds. Rising slowly can help while your doctor looks into it.'},
+    {id:'stress-body', t:'Stress is felt in the whole body', b:'Your adrenal glands release cortisol to help you rise to a challenge, which is useful in short bursts. Over long periods, stress can influence sleep, concentration and physical wellbeing.'}],
+  hormone:[
+    {id:'horm-flush', when:()=>A('hot flushes')>=3, t:'Hot flushes are very common', b:'Most women have hot flushes at some point during the menopause transition, and some men experience them too. There are safe and effective ways to manage them.'},
+    {id:'horm-cold', when:()=>A('unusually cold')>=3, t:'Your thyroid sets your thermostat', b:'Your thyroid helps control how much heat your body makes. Feeling cold when others are comfortable is one of the clues doctors look at.'},
+    {id:'horm-joints', when:()=>AQ('joint aches')>=3, t:'Hormones help look after your joints', b:'Oestrogen and testosterone both help maintain joints, muscles and connective tissue, which is one reason aches can appear during hormonal change.'},
+    {id:'horm-hair', when:()=>AQ('thinning hair')>=3, t:'Hair grows in cycles', b:'Each hair grows for years, rests, then falls out. Hormone and thyroid changes can shift that cycle, and hair often recovers once the cause is addressed.'},
+    {id:'horm-gradual', t:'Hormones change gradually', b:'Many midlife hormone shifts happen over several years rather than overnight, which is why symptoms can come and go.'}],
+  metab:[
+    {id:'met-family', when:()=>AQ('family have diabetes')===0, t:'Family history gives you a head start', b:'Knowing diabetes runs in your family means you and your doctor can check earlier. Healthy lifestyle changes can greatly lower the risk of type 2 diabetes, even with a family history.'},
+    {id:'met-walk', when:()=>A('sleepy after meals')>=3, t:'A short walk after meals helps', b:'Even 10 to 15 minutes of gentle walking after eating can help soften the rise in blood sugar that follows a meal.'},
+    {id:'met-waist', when:()=>optIs('waist measurement','Yes, a lot','A little'), t:'Where the body stores fat matters', b:'Fat stored around the waist is more closely linked to metabolic health than overall weight, and it tends to respond well to changes in activity, sleep and diet.'},
+    {id:'met-weight', when:()=>A('hard to lose weight')>=3, t:'Weight is about more than willpower', b:'Hormones, sleep, stress and some medicines all influence appetite and how the body stores energy. That is why a personal plan often works better than a general one.'},
+    {id:'met-muscle', t:'Your muscles manage blood sugar', b:'Muscles take up a large share of the sugar from each meal. Staying active and keeping muscle strong helps your body handle blood sugar well.'}],
+  life:[
+    {id:'life-move', when:()=>optIs('active for 30 minutes','0 days','1 to 2 days'), t:'Every bit of movement counts', b:'Even moderate activity can support heart health. Walking, gardening, cycling and other everyday activities all count towards your weekly movement.'},
+    {id:'life-strength', when:()=>optIs('resistance training','Never','Occasionally'), t:'Strength keeps you independent', b:'Muscle-strengthening activity supports bone and muscle health as you age. Two sessions a week is a common goal, and body-weight moves count.'},
+    {id:'life-sit', when:()=>optIs('spend sitting','6 to 9','More than 9'), t:'Break up long spells of sitting', b:'Standing or moving for a few minutes every half hour can help your circulation and blood sugar, even if you are active at other times.'},
+    {id:'life-light', when:()=>A('outdoors in daylight')<=1, t:'Morning light sets your body clock', b:'Daylight, especially in the morning, helps set your internal clock, which supports better sleep at night.'},
+    {id:'life-friends', when:()=>A('connected to friends')<=1, t:'Connection is good for health', b:'Strong social connections are linked with better health and longer lives. Small, regular contact counts.'},
+    {id:'life-heart', t:'Movement is medicine for the heart', b:'Regular physical activity supports heart and metabolic health, and it helps sleep, mood and balance too.'}],
+  history:[
+    {id:'hist-supp', when:()=>{ const q=Q.find(x=>x.k==='quick'&&x.rows.some(r=>r.includes('vitamin D'))); return Object.values(S.answers[q.i]||{}).some(v=>v>0); }, t:'Supplements can interact with medicines', b:'Some supplements can change how medicines work. Sharing everything you take, even vitamins, helps your doctor plan safely.'},
+    {id:'hist-family', when:()=>AQ('endocrine')===0, t:'Family history is useful information', b:'Family history can help identify certain inherited health risks, so the right checks can happen sooner.'},
+    {id:'hist-check', when:()=>optIs('full health check','More than 3 years ago','Never'), t:'Many conditions start quietly', b:'Raised blood sugar or blood pressure often cause no symptoms at first. Regular checks help spot them early, when they are easiest to manage.'},
+    {id:'hist-list', t:'Your medicine list is a safety tool', b:'Keeping an accurate list of your medicines and supplements helps reduce the risk of medication-related errors. Bring it to every appointment.'}]
+};
+const FACT_BY_ID = {}; Object.entries(FACTS).forEach(([sid,l]) => l.forEach(f => FACT_BY_ID[f.id] = {...f, sid}));
+function pickFact(si) {
+  const lib = FACTS[SEC[si].id], seen = new Set(S.facts.map(f=>f.id));
+  const ok = f => { try { return f.when(); } catch(e) { return false; } };
+  const pers = lib.find(f => f.when && !seen.has(f.id) && ok(f));
+  return pers ? {id:pers.id, personal:true} : {id:(lib.find(f=>!f.when)||lib[0]).id, personal:false};
+}
+
+/* ---------- State ---------- */
+const KEY = 'aw-assessment';
+const blank = () => ({answers:{}, idx:0, furthest:0, earned:[], xp:0, got:{}, facts:[], screen:'intro', pending:null, coached:false});
+let S = (() => { try { const v = JSON.parse(localStorage.getItem(KEY)); if (v && v.answers) return {...blank(), ...v, screen:'intro'}; } catch(e) {} return blank(); })();
+if (S.pending != null) { if (S.pending < SEC.length-1) { S.idx = SEC[S.pending].end+1; S.furthest = Math.max(S.furthest, S.idx); } S.pending = null; }
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let ui = {cue:null, drawer:false, tab:'stages', openSec:null, lastIdx:null, shownXp:S.xp, jump:false, jsec:0};
+let busy = false;
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
+const wait = ms => new Promise(r => setTimeout(r, RM ? Math.min(ms, 120) : ms));
+const fmt = n => n.toLocaleString('en-GB');
+const pad = n => String(n).padStart(2,'0');
+
+const unitsDone = q => { const v = S.answers[q.i]; if (v===undefined||v===null) return 0;
+  if (q.k==='quick') return Object.keys(v).length; if (q.opt) return 1; if (v==='') return 0; return Array.isArray(v) ? (v.length?1:0) : 1; };
+const complete = q => unitsDone(q) >= q.u;
+const doneUnits = () => Q.reduce((a,q)=>a+unitsDone(q),0);
+const secUnits = si => Q.filter(q=>q.si===si).reduce((a,q)=>a+unitsDone(q),0);
+const secDone = si => S.earned.includes(si);
+const pct = () => Math.round(doneUnits()/TOTAL*100);
+const secsLeft = (si) => Q.filter(q=>si===undefined||q.si===si).reduce((a,q)=>a+(q.u-unitsDone(q))*(q.k==='quick'?5:12),0);
+const minsLeft = si => { const s = secsLeft(si); return s<=0 ? '0 min' : s<60 ? '1 min' : `${Math.ceil(s/60)} min`; };
+const level = () => S.earned.length;
+const unlockedQ = i => i <= S.furthest;
+const unlockedSec = si => SEC[si].start <= S.furthest;
+const grant = (key, amt) => { if (S.got[key]) return 0; S.got[key] = 1; S.xp += amt; return amt; };
+const terms = t => [...(t||'').matchAll(/\{([^|}]+)\|([^}]+)\}/g)].map(m=>m[2]);
+const rich = t => (t||'').replace(/\{([^|}]+)\|([^}]+)\}/g, (_,l,k)=>`<button type="button" class="term" data-term="${k}" aria-expanded="${ui.cue===k}">${l}</button>`);
+const cap = s => s.charAt(0).toUpperCase()+s.slice(1);
+
+/* ---------- Sound (Web Audio, optional) ---------- */
+let AC = null, soundOn = (() => { try { return localStorage.getItem('aw-snd')!=='0'; } catch(e) { return true; } })();
+const ctx = () => { if (!AC) { const C = window.AudioContext||window.webkitAudioContext; if (!C) return null; AC = new C(); } if (AC.state==='suspended') AC.resume(); return AC; };
+function tone(a, type, f0, f1, t0, dur, vol) { const o=a.createOscillator(), g=a.createGain(); o.type=type; o.frequency.setValueAtTime(f0,t0); if (f1) o.frequency.exponentialRampToValueAtTime(f1,t0+dur*.6);
+  g.gain.setValueAtTime(.0001,t0); g.gain.exponentialRampToValueAtTime(vol,t0+.012); g.gain.exponentialRampToValueAtTime(.0001,t0+dur); o.connect(g).connect(a.destination); o.start(t0); o.stop(t0+dur+.02); }
+const snd = f => { if (!soundOn) return; const a = ctx(); if (a) f(a, a.currentTime); };
+let combo = 0, comboT;
+const tap = () => snd((a,t) => { clearTimeout(comboT); combo = Math.min(combo+1,6); comboT = setTimeout(()=>combo=0,1400);
+  const k = 1+combo*.06+Math.random()*.04; tone(a,'triangle',420*k,1100*k,t,.15,.13); tone(a,'sine',1650*k,0,t+.06,.12,.04); });
+const munch = () => snd((a,t) => { tone(a,'triangle',300,190,t,.07,.07); tone(a,'triangle',340,210,t+.1,.07,.06); });
+const ting = j => snd((a,t) => { const f = 1568*Math.pow(1.06, j); tone(a,'sine',f,0,t,.2,.045); tone(a,'sine',f*2.01,0,t,.12,.012); });
+const sndComplete = () => snd((a,t) => { [392,523.25,659.25].forEach((f,j)=>tone(a,'triangle',f,0,t+j*.08,.3,.1)); tone(a,'triangle',783.99,0,t+.26,.6,.12); tone(a,'sine',1567.98,0,t+.26,.5,.03); });
+const sndFlip = () => snd((a,t) => { tone(a,'sine',330,660,t,.35,.05); tone(a,'triangle',880,0,t+.3,.25,.03); });
+const sndBadge = () => snd((a,t) => { [1046.5,1174.66,1318.51,1567.98,1760,2093].forEach((f,j)=>tone(a,'sine',f,0,t+j*.05,.4,.05)); tone(a,'sine',523.25,0,t+.32,1.1,.1); tone(a,'sine',523.25*2.76,0,t+.32,.6,.025); });
+
+/* ---------- Leaves: every answer flies a leaf to the caterpillar, which eats it and grows ---------- */
+const LEAFI = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20C4 9.5 10.5 4 20.5 3.5C20.5 14 14.5 20 4 20Z" fill="#7cc46a"/><path d="M4 20C4 9.5 10.5 4 20.5 3.5C16 8 11 12 4 20Z" fill="#9ad486"/><path d="M5.5 18.5 15.5 8.5" stroke="#3f8a3a" stroke-width="1.3" stroke-linecap="round" fill="none"/></svg>';
+const leafWord = n => n===1 ? 'leaf' : 'leaves';
+const grow = w => (0.85 + 0.3*w/100).toFixed(2);
+let xpRAF;
+function tweenXP() { const el = document.getElementById('xpv'); if (!el) return; const from = +el.dataset.n||0, to = ui.shownXp, t0 = performance.now(); cancelAnimationFrame(xpRAF);
+  const st = t => { const k = Math.min(1,(t-t0)/280), v = Math.round(from+(to-from)*k); el.textContent = fmt(v); el.dataset.n = v; const w = document.getElementById('xpw'); if (w) w.textContent = leafWord(v); if (k<1) xpRAF = requestAnimationFrame(st); }; xpRAF = requestAnimationFrame(st); }
+function bump(id) { const p = document.getElementById(id); if (p) { p.classList.remove('hit'); void p.offsetWidth; p.classList.add('hit'); } }
+function chomp() { const r = document.getElementById('rider'); if (r) { r.classList.remove('eat','hop'); void r.offsetWidth; r.classList.add('eat'); } }
+function arrive(sh, k) { ui.shownXp += sh; tweenXP(); bump('xpPill'); chomp(); if (k<3) munch(); }
+function target() {
+  const r = document.getElementById('rider'), p = document.getElementById('xpPill');
+  const el = r && r.getBoundingClientRect().width ? r : p;
+  if (!el) return {x:innerWidth-90, y:24};
+  const b = el.getBoundingClientRect(); return {x:b.left+b.width/2, y:b.top+b.height*(el===r ? .55 : .5)};
+}
+function fly(amount, x, y, n) {
+  if (!amount) return;
+  n = Math.min(8, n || amount);
+  const lab = document.createElement('span'); lab.className = 'xpf'; lab.innerHTML = `+${amount} ${leafWord(amount)}`; lab.style.left = x+'px'; lab.style.top = y+'px';
+  document.body.appendChild(lab); setTimeout(()=>lab.remove(), 1000);
+  if (RM || !Element.prototype.animate) { setTimeout(()=>arrive(amount,0), 300); return; }
+  for (let k=0;k<n;k++) {
+    const sh = Math.floor(amount/n) + (k < amount%n ? 1 : 0);
+    setTimeout(() => {
+      const {x:tx, y:ty} = target();
+      const c = document.createElement('i'); c.className = 'leafp'; c.innerHTML = LEAFI; document.body.appendChild(c);
+      const ang = Math.random()*Math.PI*2, rad = 16+Math.random()*24, bx = x+Math.cos(ang)*rad, by = y+Math.sin(ang)*rad*.7-14;
+      const cx = bx+(tx-bx)*.2+(k%2?1:-1)*(70+Math.random()*110), cy = ty+(by-ty)*.4, spin = (k%2?1:-1)*(240+Math.random()*200);
+      const fr = [{transform:`translate(${x}px,${y}px) rotate(0) scale(.3)`,opacity:0,offset:0},{transform:`translate(${bx}px,${by}px) rotate(${spin*.1}deg) scale(1.1)`,opacity:1,offset:.16}];
+      for (let s=1;s<=10;s++) { const t=s/10, e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2, u=1-e;
+        fr.push({transform:`translate(${u*u*bx+2*u*e*cx+e*e*tx}px,${u*u*by+2*u*e*cy+e*e*ty}px) rotate(${spin*(.1+.9*e)}deg) scale(${1.1-.6*e})`,opacity:s===10?.2:1,offset:.16+.84*t}); }
+      let ok = false; const fin = () => { if (ok) return; ok = true; c.remove(); arrive(sh,k); };
+      c.animate(fr, {duration:900+Math.random()*160, easing:'linear', fill:'forwards'}).onfinish = fin; setTimeout(fin, 1500);
+    }, 160 + k*70);
+  }
+}
+const flyFrom = (el, amt, n, mode='right') => { if (!el||!amt) return; const r = el.getBoundingClientRect();
+  fly(amt, mode==='right' ? r.right-72 : r.left+r.width/2, mode==='right' ? r.top+r.height/2 : r.top+6, n); };
+function coach() { if (S.coached) return; S.coached = true; save();
+  setTimeout(() => toast(`<span class="lf-i">${LEAFI}</span>Every answer is a leaf that helps your ${STAGES[level()].n.toLowerCase()} grow`, 4200), 700); }
+function toast(html, ms=2400) { const t = document.getElementById('toast'); t.innerHTML = html; t.classList.add('show'); clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove('show'), ms); }
+
+/* ---------- Scene layer: linear crossfade between sections ---------- */
+const worlds = document.getElementById('worlds'); let curWorld = null;
+function setWorld(key) {
+  const th = key===9 ? TH_FINAL : TH[key], root = document.documentElement.style;
+  root.setProperty('--acc', th.a); root.setProperty('--acc-l', th.al); root.setProperty('--acc-d', th.ad);
+  if (curWorld === key) return; curWorld = key;
+  const el = document.createElement('div'); el.className = 'world';
+  el.innerHTML = `<div class="ph" style="background-image:url(${BG(th.id)})"></div><div class="veil"></div>${motes(key+1)}`;
+  const olds = [...worlds.children]; worlds.appendChild(el);
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('on')));
+  setTimeout(() => olds.forEach(o => o.remove()), 1600);
+}
+
+/* ---------- Views ---------- */
+const app = document.getElementById('app');
+const capR = () => S.screen==='q' ? `~${minsLeft()} left · ${pct()}%` : `${pct()}% completed`;
+function segBar(cur) {
+  const fin = S.screen==='complete';
+  return `<div class="segs" id="prog" role="progressbar" aria-label="Assessment progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct()}">${SEC.map(s => { const d = secDone(s.si), w = d ? 100 : Math.round(secUnits(s.si)/s.units*100), c = s.si===cur && !fin;
+    const cr = c ? `<span class="cr ride" id="rider" style="left:${Math.max(6,Math.min(94,w))}%;--g:${grow(w)}" title="Your ${STAGES[level()].n.toLowerCase()} grows with every answer">${stageArt(level())}</span>`
+      : d ? (fin && s.si===SEC.length-1 ? `<span class="cr ride" style="left:94%" title="Butterfly">${stageArt(9)}</span>` : '')
+      : `<span class="cr up" title="Finish ${s.name} to become a ${STAGES[s.si+1].n}">${stageArt(s.si+1)}</span>`;
+    return `<div class="sg ${d?'done':''} ${c?'cur':''}"><span class="tr"><i style="width:${w}%"></i>${cr}</span><span class="nm">${SHORT[s.id]}</span></div>`; }).join('')}</div>
+    <div class="cap"><span><b>${fin ? 'All sections complete' : SEC[cur].name}</b></span><span id="capr">${capR()}</span></div>`;
+}
+function header() {
+  const scr = S.screen, q = Q[S.idx], si = scr==='complete' ? SEC.length-1 : q.si;
+  const lab = scr==='q' ? (q.u>1 ? `<span class="lw">Questions </span>${pad(q.n0)} to ${pad(q.n0+q.u-1)}/${TOTAL}` : `<span class="lw">Question </span>${pad(q.n0)}/${TOTAL}`)
+    : scr==='complete' ? `All ${TOTAL} questions answered` : `${TOTAL} questions · ${SEC.length} sections`;
+  return `<header class="top" id="top"><div class="in">
+    <div class="hrow"><div class="ttl"><h1><span class="full">${ASSESSMENT}</span><span class="short">Endocrine Health Assessment</span></h1><p>${lab}</p></div>
+      <div class="hr"><div class="pills">
+        ${scr==='complete' ? '' : `<span class="pill sec">${SHORT[SEC[si].id]}</span><span class="pill time" id="timev">~${minsLeft()} left</span>`}
+        <span class="pill leaf" id="xpPill" title="Every answer is a leaf that helps your ${STAGES[level()].n.toLowerCase()} grow"><span class="lf-i">${LEAFI}</span><b id="xpv" data-n="${ui.shownXp}">${fmt(ui.shownXp)}</b> <span id="xpw">${leafWord(ui.shownXp)}</span></span>
+      </div><p class="pct"><b id="pctv">${pct()}%</b> completed</p>
+      <button class="menu-btn" data-act="menu" aria-label="Menu" aria-haspopup="dialog">${ic('menu')}</button></div></div>
+    ${segBar(si)}</div></header>`;
+}
+function bar(q) {
+  return `<footer class="bar"><div class="bin">
+    <div class="bl"><button class="save" data-act="exit">Save Draft &amp; Exit</button>
+      <span class="tools"><button class="ib" data-act="text" aria-pressed="${document.body.classList.contains('lg-text')}" aria-label="Larger text" title="Larger text">${ic('type')}</button><button class="ib" data-act="sound" aria-pressed="${soundOn}" aria-label="Sound effects" title="Sound effects">${ic(soundOn?'vol':'mute')}</button></span></div>
+    <div class="bc"><button class="tl" data-act="jump" id="jumpBtn" aria-expanded="${ui.jump}" aria-controls="jpop">${ic('list')}<span>Jump to Question</span></button></div>
+    <div class="br"><button class="back-m" data-act="back" id="backM" ${q.i===0?'disabled':''} aria-label="Previous question">${ic('chevL')}<span>Back</span></button><button class="cta" data-act="next" id="nextBtn" ${canNext(q)?'':'disabled'}>${q.i===Q.length-1?'Finish':'Continue'}</button></div>
+  </div></footer>`;
+}
+const dots = () => `<span class="dots" aria-hidden="true">${'<i></i>'.repeat(9)}</span>`;
+const rd = `<span class="rd">${tickSvg}</span>`;
+const allSet = q => { const a = S.answers[q.i]||{}; return q.rows.every((_,r)=>a[r]===q.all); };
+function quickHTML(q) {
+  const a = S.answers[q.i]||{}, n = q.opts.length;
+  return `<div class="qk" id="quick" style="--n:${n};--m:${n<=3?n:n===4?2:1}">
+    <div class="qk-bar"><p>${q.u} short questions${q.help ? `. ${q.help}` : ''}</p>
+      <button type="button" class="qk-none" data-all="1" aria-pressed="${allSet(q)}">${ic('check')}${q.allLabel}</button></div>
+    ${q.rows.map((t,r)=>{ const ok = a[r]!==undefined; return `<div class="qk-q ${ok?'ok':''}" data-row="${r}"><p class="qk-t" id="qk${r}"><span class="n" aria-hidden="true">${ok ? tickSvg : r+1}</span><span>${rich(t)}</span></p>
+      <div class="opts row" role="radiogroup" aria-labelledby="qk${r}">${q.opts.map(([o],j)=>`<button type="button" class="opt" role="radio" aria-checked="${a[r]===j}" data-g="${r}:${j}">${rd}<span class="tx"><span class="l">${o}</span></span></button>`).join('')}</div></div>`; }).join('')}
+  </div>`;
+}
+function body(q) {
+  const v = S.answers[q.i];
+  if (q.k==='quick') return quickHTML(q);
+  if (q.k==='freq') return `<div class="opts" role="radiogroup" aria-labelledby="qt">${FREQ.map(([l],j)=>`<button type="button" class="opt" role="radio" aria-checked="${v===j}" data-v="${j}">${rd}<span class="tx"><span class="l">${l}</span></span></button>`).join('')}</div>`;
+  if (q.k==='single') return `<div class="opts" role="radiogroup" aria-labelledby="qt">${q.o.map((l,j)=>`<button type="button" class="opt" role="radio" aria-checked="${v===j}" data-v="${j}">${rd}<span class="tx"><span class="l">${l}</span></span></button>`).join('')}</div>`;
+  if (q.k==='multi') { const a = Array.isArray(v)?v:[]; return `<div class="opts multi" role="group" aria-labelledby="qt">${q.o.map((l,j)=>`<button type="button" class="opt" role="checkbox" aria-checked="${a.includes(j)}" data-v="${j}">${rd}<span class="tx"><span class="l">${l}</span></span></button>`).join('')}</div>`; }
+  if (q.k==='text') return `<textarea class="ta" id="ta" placeholder="Type here (optional)">${v||''}</textarea>`;
+}
+const canNext = q => q.opt || complete(q);
+function cueHTML(q) {
+  const box = (t,d) => `<div class="cuec">${ic('help')}<div><b>${t}</b>${d}</div></div>`;
+  const k = ui.cue || terms(q.k==='quick' ? q.rows.join(' ') : q.t+' '+(q.help||''))[0];
+  if (k && CUE[k]) return box(cap(k), `<p>${CUE[k][0]} ${CUE[k][1]}</p>`);
+  const legend = q.k==='freq' ? FREQ : q.k==='quick' && q.opts.some(o=>o[1]) ? q.opts : null;
+  if (legend) return box('What the answers mean', `<dl>${legend.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join('')}</dl>`);
+  return box('Why we ask', `<p>${SEC[q.si].why}</p>`);
+}
+function renderQ() {
+  const q = Q[S.idx], isNew = ui.lastIdx !== q.i, qk = q.k==='quick';
+  if (isNew) ui.cue = null;
+  app.innerHTML = header() + `<main class="stage"><div class="qz ${isNew?'rise':''}" id="qz">
+      <p class="eyeg">${dots()}${qk ? `Quick round · Answer all ${q.u} for ${MISSION} bonus leaves` : 'Building Personalised Health Profile'}</p>
+      <div class="qrow"><button class="arrow" data-act="back" ${q.i===0?'disabled':''} aria-label="Previous question">${ic('chevL')}</button>
+        <h2 class="qtitle" id="qt" tabindex="-1">${qk ? 'A few quick ones' : rich(q.t)}</h2>
+        <button class="arrow" data-act="next" id="fwd" ${canNext(q)?'':'disabled'} aria-label="Next question">${ic('chevR')}</button></div>
+      ${!qk && q.help ? `<p class="qhelp">${rich(q.help)}</p>` : ''}
+      ${body(q)}
+    </div>
+    <aside class="cue ${qk?'wide':''}" id="cue" aria-live="polite">${cueHTML(q)}</aside></main>` + bar(q);
+  ui.lastIdx = q.i;
+  if (ui.focusQ) { ui.focusQ = false; requestAnimationFrame(() => { const h = document.getElementById('qt'); if (h) h.focus({preventScroll:true}); }); }
+}
+const stageRow = (upto, cls='') => `<div class="strip ${cls}" aria-label="Life stages">${STAGES.map((s,i)=>`<span class="sth ${i<=upto?'on':''}" title="${s.n}">${stageArt(i)}</span>`).join('')}</div>`;
+const mechHTML = () => `<div class="mech">
+  <div><span class="mi" style="background:#f5fbec"><span class="lf-i" style="width:24px;height:24px">${LEAFI}</span></span><b>A leaf an answer</b><span>Each one feeds your little egg</span></div>
+  <div><span class="mi" style="background:#e3f8ee">${stageArt(3)}</span><b>Egg to butterfly</b><span>It grows a stage every section</span></div>
+  <div><span class="mi" style="background:#ffe9ee;color:#a8475f">${ic('sparkles')}</span><b>Health discoveries</b><span>One after every section</span></div>
+  <div><span class="mi" style="background:#e9eefc;color:#47599c">${ic('exit')}</span><b>Pause any time</b><span>Your progress is saved</span></div></div>`;
+function renderIntro() {
+  const n = doneUnits(), resume = n>0, fin = S.earned.length===SEC.length;
+  app.innerHTML = header() + `<main class="stage center"><div class="panel">
+    <p class="eyeg">${dots()}Online Health Assessment · Doctor reviewed</p>
+    <h2>${resume ? 'Welcome back' : 'Your health assessment, one section at a time'}</h2>
+    <p class="ip">${resume ? `Your ${STAGES[level()].n.toLowerCase()} has eaten ${fmt(S.xp)} ${leafWord(S.xp)} so far. We’ll take you straight to where you left off.` : 'Answer at your own pace. Every answer is a leaf that feeds your little egg, and every section you finish helps it grow into its next stage, all the way to a butterfly.'}</p>
+    <div class="facts"><span><b>${resume ? `${n} of ${TOTAL}` : TOTAL}</b> questions</span><span>About <b>${minsLeft()}</b></span><span><b>${SEC.length}</b> sections</span></div>
+    ${resume ? '' : mechHTML()}
+    ${stageRow(level())}
+    <div class="ctas">${fin ? `<button class="cta" data-act="results">See my results ${ic('right')}</button><button class="save" data-act="restart">Start over</button>`
+      : resume ? `<button class="cta" data-act="resume">Continue ${ic('right')}</button><button class="save" data-act="restart">Start over</button>`
+      : `<button class="cta" data-act="start">Start Assessment ${ic('right')}</button>`}</div>
+  </div></main>`;
+}
+function renderSaved() {
+  app.innerHTML = header() + `<main class="stage center"><div class="panel">
+    <p class="eyeg">${dots()}Draft saved</p><h2>Your progress is saved</h2>
+    <p class="ip">Come back any time. Your answers, leaves, stages and discoveries are kept, and we’ll take you straight to where you left off.</p>
+    <div class="stats"><div><b>${doneUnits()}/${TOTAL}</b><span>answered</span></div><div><b>${fmt(S.xp)}</b><span>${leafWord(S.xp)} eaten</span></div><div><b>${STAGES[level()].n}</b><span>stage ${level()+1} of 10</span></div></div>
+    <div class="ctas"><button class="cta" data-act="resume">Continue ${ic('right')}</button><button class="save" data-act="home">Back to start</button></div>
+  </div></main>`;
+}
+function renderComplete() {
+  app.innerHTML = header() + `<main class="stage center"><div class="panel">
+    <div class="cmp-art" id="cmpArt">${stageArt(9)}</div>
+    <p class="eyeg">${dots()}Stage 10 of 10 · Assessment complete</p>
+    <h2>Your butterfly has emerged</h2>
+    <p class="ip">You answered all ${TOTAL} questions, and every answer helped it grow. A doctor and a scientist will now review your answers together before your consultation.</p>
+    <div class="stats"><div><b>${fmt(S.xp)}</b><span>${leafWord(S.xp)} eaten</span></div><div><b>10/10</b><span>life stages</span></div><div><b>${S.facts.length}</b><span>discoveries</span></div></div>
+    ${stageRow(9)}
+    <div class="ctas"><a class="cta" href="#">Book Online Consultation ${ic('right')}</a><button class="save" data-act="tabfacts">See my discoveries</button><button class="save" data-act="review">Review my answers</button></div>
+  </div></main>`;
+}
+function measure() { const t = document.getElementById('top'); if (t) document.documentElement.style.setProperty('--hdr-h', t.offsetHeight+'px'); }
+function render() {
+  setWorld(S.screen==='complete' ? 9 : Q[S.idx].si);
+  if (S.screen==='intro') renderIntro(); else if (S.screen==='q') renderQ(); else if (S.screen==='saved') renderSaved(); else renderComplete();
+  measure(); renderDrawer(); renderJump();
+}
+addEventListener('resize', measure);
+
+/* ---------- Section complete: the creature grows a stage, then shows the next stage locked ---------- */
+const reward = document.getElementById('reward');
+function rewardHTML(si) {
+  const L = level(), nx = si+1 < SEC.length ? si+1 : -1, rec = S.facts.find(f=>f.si===si), f = FACT_BY_ID[rec.id];
+  return `<div class="rw" role="document">
+    <div class="bwrap"><span class="halo"></span><span class="rays"></span><span class="bsil">${stageBadge(L,'glow')}</span>
+      <span class="fwrap" id="breal"><span class="flip"><span class="face front">${stageBadge(L)}</span>${nx>=0 ? `<span class="face back">${stageBadge(L+1,'lock')}<span class="lk">${ic('lock')}</span></span>` : ''}</span></span></div>
+    <div class="lbl st s2"><div class="now"><small>New stage unlocked</small><b id="rwT">${STAGES[L].n}</b><p>Your answers in ${SEC[si].name} helped it grow.</p></div>
+      ${nx>=0 ? `<div class="nx"><small>${ic('lock')}Next stage</small><b>${STAGES[L+1].n}</b><p>Every answer in ${SEC[nx].name} helps it grow there.</p></div>` : ''}</div>
+    <div class="rfact st s3"><p class="feye">${ic('sparkles')}Did you know?</p><h3>${f.t}</h3><p class="fb">${f.b}</p></div>
+    <div class="acts st s3"><button class="cta" data-act="continue">${nx>=0 ? `Continue to ${SEC[nx].name}` : 'See my results'} ${ic('right')}</button><button class="save" data-act="exit">Save &amp; Take a Break</button></div>
+    <p class="cd st s3" id="cd" aria-live="off"></p>
+  </div>`;
+}
+let cdT = null, cdLeft = 0;
+const CD_SECONDS = 10;
+function paintCd(last) { const el = document.getElementById('cd'); if (!el) return;
+  el.innerHTML = cdT ? `Moving to ${last ? 'your results' : 'the next question'} in <b>${cdLeft}s</b><button type="button" data-act="cdstop">Stay here</button>` : 'Continue when you are ready'; }
+function startCountdown(si) {
+  const last = si===SEC.length-1; cdLeft = CD_SECONDS; clearInterval(cdT);
+  cdT = setInterval(() => { cdLeft--; paintCd(last); if (cdLeft<=0) { stopCountdown(); cont(); } }, 1000); paintCd(last);
+}
+function stopCountdown(paint) { clearInterval(cdT); cdT = null; if (paint) paintCd(); }
+async function finishSection(si) {
+  busy = true;
+  S.earned.push(si); S.pending = si; S.furthest = Math.max(S.furthest, Math.min(Q.length-1, SEC[si].end+1));
+  if (!S.facts.some(f=>f.si===si)) S.facts.push({si, ...pickFact(si)}); save();
+  const th = TH[si]; reward.style.cssText = `--acc:${th.a};--acc-l:${th.al};--acc-d:${th.ad}`;
+  document.body.classList.add('soft'); sndComplete();
+  await wait(450); reward.innerHTML = rewardHTML(si); reward.className = 'reward open'; reward.scrollTop = 0;
+  await wait(80);  reward.classList.add('p1');
+  await wait(800); reward.classList.add('p2'); sndBadge();
+  await wait(700); reward.classList.add('p3'); busy = false;
+  const btn = reward.querySelector('[data-act="continue"]'); if (btn) btn.focus({preventScroll:true});
+  say(`New stage unlocked: ${STAGES[level()].n}. Did you know? ${FACT_BY_ID[S.facts.find(f=>f.si===si).id].t}.`);
+  await wait(2400); if (S.pending!==si || !reward.classList.contains('open')) return;
+  if (si+1 < SEC.length) { reward.classList.add('flipped'); sndFlip(); }
+  await wait(1100); if (S.pending===si && reward.classList.contains('open')) startCountdown(si);
+}
+function closeReward() { stopCountdown(); reward.className = 'reward'; document.body.classList.remove('soft'); setTimeout(() => { if (!reward.classList.contains('open')) reward.innerHTML = ''; }, 600); }
+function cont() {
+  const si = S.pending; if (si==null || busy) return; S.pending = null; closeReward();
+  if (si === SEC.length-1) return goComplete();
+  S.idx = SEC[si].end+1; S.furthest = Math.max(S.furthest, S.idx); S.screen = 'q'; ui.focusQ = true; save(); render(); scrollTo(0,0);
+}
+function goComplete() { S.screen = 'complete'; save(); render(); scrollTo(0,0); sndBadge(); }
+
+/* ---------- Jump to question panel ---------- */
+const jpop = document.getElementById('jpop');
+function renderJump() {
+  if (!ui.jump || S.screen!=='q') { ui.jump = false; jpop.classList.remove('open'); jpop.inert = true; const b = document.getElementById('jumpBtn'); if (b) b.setAttribute('aria-expanded','false'); return; }
+  const si = ui.jsec, sec = SEC[si], units = [];
+  Q.filter(q=>q.si===si).forEach(q => { for (let r=0;r<q.u;r++) units.push({q, r}); });
+  const prevOk = si>0, nextOk = si<SEC.length-1 && unlockedSec(si+1);
+  jpop.innerHTML = `<div class="jh"><button type="button" class="jn" data-jsec="-1" ${prevOk?'':'disabled'} aria-label="Previous section">${ic('chevL')}</button><h2 id="jpT">${SHORT[sec.id]}</h2><button type="button" class="jn" data-jsec="1" ${nextOk?'':'disabled'} aria-label="Next section">${ic('chevR')}</button><button type="button" class="jx" data-act="jclose" aria-label="Close">${ic('x')}</button></div>
+    <div class="jg">${units.map(({q,r},k) => { const un = unlockedQ(q.i), cur = q.i===S.idx, ans = q.k==='quick' ? (S.answers[q.i]||{})[r]!==undefined : complete(q) && !(q.opt && S.answers[q.i]===undefined);
+      return `<button type="button" class="jc ${ans?'a':''} ${cur?'c':''}" data-jump="${q.i}" ${un?'':'disabled'} aria-label="Question ${k+1}${ans?', answered':''}${cur?', current':''}${un?'':', locked'}">${k+1}</button>`; }).join('')}</div>
+    <p class="jf">(${secUnits(si)}/${sec.units} answered)</p>`;
+  jpop.classList.add('open'); jpop.inert = false; const b = document.getElementById('jumpBtn'); if (b) b.setAttribute('aria-expanded','true');
+}
+function openJump(v) {
+  if (v && ui.drawer) { ui.drawer = false; renderDrawer(); }
+  ui.jump = v; if (v) ui.jsec = Q[S.idx].si; renderJump();
+  if (v) { const f = jpop.querySelector('.jc.c') || jpop.querySelector('.jx'); if (f) f.focus({preventScroll:true}); }
+}
+
+/* ---------- Drawers: jump to question, badge collection ---------- */
+const drawer = document.getElementById('drawer'), scrim = document.getElementById('scrim');
+function renderDrawer() {
+  if (!ui.drawer) { drawer.classList.remove('open'); drawer.inert = true; scrim.classList.remove('open'); return; }
+  const close = `<button class="x" data-act="close" aria-label="Close">${ic('x')}</button>`;
+  drawer.classList.toggle('sheet', ui.drawer==='menu');
+  if (ui.drawer==='menu') {
+    const lg = document.body.classList.contains('lg-text');
+    drawer.innerHTML = `<div class="dh"><div><h2 id="dTitle">Menu</h2><p>${doneUnits()} of ${TOTAL} answered · ${fmt(S.xp)} ${leafWord(S.xp)}</p></div>${close}</div>
+      <div class="db">
+        <button class="mrow" data-act="jump">${ic('list')}<span>Jump to a question<small>Go back to any question you have reached</small></span>${ic('chevR')}</button>
+        <button class="mrow" data-act="text" role="switch" aria-checked="${lg}">${ic('type')}<span>Larger text</span><span class="sw" aria-hidden="true"></span></button>
+        <button class="mrow" data-act="sound" role="switch" aria-checked="${soundOn}">${ic(soundOn?'vol':'mute')}<span>Sound effects</span><span class="sw" aria-hidden="true"></span></button>
+        <button class="mrow" data-act="exit">${ic('exit')}<span>Save draft and exit<small>Your answers, leaves and stages are kept</small></span></button>
+      </div>`;
+  } else if (ui.drawer==='jump') {
+    if (ui.openSec==null) ui.openSec = Q[S.idx].si;
+    drawer.innerHTML = `<div class="dh"><div><h2 id="dTitle">Jump to a question</h2><p>${doneUnits()} of ${TOTAL} answered</p></div>${close}</div>
+      <div class="db">${SEC.map(sec => { const un = unlockedSec(sec.si), d = secDone(sec.si), open = ui.openSec===sec.si && un;
+        return `<div class="acc ${d?'done':''} ${un?'':'lock'} ${open?'open':''}"><button type="button" data-sec="${sec.si}" ${un?'':'disabled'} aria-expanded="${open}">
+          <span class="ic">${ic(un?(d?'check':sec.icon):'lock')}</span><span class="tx"><b>${sec.name}</b><span>${un?`${secUnits(sec.si)} of ${sec.units} answered`:'Opens when you reach it'}</span></span>${un?ic('chev','chev'):''}</button>
+          <div class="pnl"><div><div class="qchips">${Q.filter(q=>q.si===sec.si).map(q => { const u = unlockedQ(q.i), a = complete(q) && !(q.opt && S.answers[q.i]===undefined), c = q.i===S.idx && S.screen==='q';
+            return `<button type="button" class="qc ${a?'a':''} ${c?'c':''}" data-jump="${q.i}" ${u?'':'disabled'} aria-label="${q.u>1?`Questions ${q.n0} to ${q.n0+q.u-1}`:`Question ${q.n0}`}">${u ? (q.u>1 ? `${q.n0} to ${q.n0+q.u-1}` : q.n0) : ic('lock')}</button>`; }).join('')}</div></div></div></div>`; }).join('')}</div>`;
+  } else {
+    const tab = ui.tab, L = level();
+    drawer.innerHTML = `<div class="dh"><div><h2 id="dTitle">Your collection</h2><p>${fmt(S.xp)} ${leafWord(S.xp)} eaten · stage ${L+1} of 10</p></div>${close}</div>
+      <div class="tabs" role="tablist"><button role="tab" data-tab="stages" aria-selected="${tab==='stages'}">Life stages<span>${L+1}/10</span></button><button role="tab" data-tab="facts" aria-selected="${tab==='facts'}">Discoveries<span>${S.facts.length}</span></button></div>
+      <div class="db">${tab==='stages'
+        ? `<div class="bgrid">${STAGES.map((st,i)=>`<div class="bcell ${i<=L?'got':i===L+1?'next':'lock'}"><span class="sth ${i<=L?'on':''}" style="width:72px;height:72px">${stageArt(i)}</span><b>${st.n}</b><span>${i<=L ? 'Reached' : i===L+1 ? 'Next stage' : 'Locked'}</span></div>`).join('')}</div>`
+        : S.facts.length ? `<div class="fl">${S.facts.map(r => { const f = FACT_BY_ID[r.id]; return `<div class="fcard" style="--c:${TH[r.si].a}"><p class="k">${SEC[r.si].name}</p><h3>${f.t}</h3><p>${f.b}</p></div>`; }).join('')}</div>`
+        : '<p class="empty">Finish your first section to unlock a health discovery.</p>'}</div>`;
+  }
+  drawer.classList.add('open'); drawer.inert = false; scrim.classList.add('open');
+}
+function openDrawer(v) { ui.drawer = v; if (v==='jump') ui.openSec = S.screen==='q' ? Q[S.idx].si : 0; renderDrawer(); if (v) drawer.querySelector('.x').focus(); else { const m = document.querySelector('.menu-btn'); if (m && getComputedStyle(m).display!=='none') m.focus({preventScroll:true}); } }
+
+/* ---------- Answering ---------- */
+function refresh() {
+  const q = Q[S.idx], ok = canNext(q);
+  ['nextBtn','fwd'].forEach(id => { const b = document.getElementById(id); if (b) b.disabled = !ok; });
+  const pv = document.getElementById('pctv'); if (pv) pv.textContent = pct()+'%';
+  const tv = document.getElementById('timev'); if (tv) tv.textContent = `~${minsLeft()} left`;
+  const w = Math.round(secUnits(q.si)/SEC[q.si].units*100), f = document.querySelectorAll('.tr>i')[q.si]; if (f) f.style.width = w+'%';
+  const rd = document.getElementById('rider'); if (rd) { rd.style.left = Math.max(6,Math.min(94,w))+'%'; rd.style.setProperty('--g', grow(w)); }
+  const cp = document.getElementById('capr'); if (cp) cp.textContent = capR();
+  const pg = document.getElementById('prog'); if (pg) pg.setAttribute('aria-valuenow', pct());
+}
+function setAnswer(v) {
+  const q = Q[S.idx];
+  if (q.k==='multi') { let a = Array.isArray(S.answers[q.i]) ? [...S.answers[q.i]] : []; const none = q.o.findIndex(o=>/^(None|Nothing|No particular)/.test(o));
+    if (a.includes(v)) a = a.filter(x=>x!==v); else if (v===none) a = [v]; else a = [...a.filter(x=>x!==none), v]; S.answers[q.i] = a; }
+  else S.answers[q.i] = v;
+  tap();
+  const el = document.querySelector(`.qz [data-v="${v}"]`);
+  if (unitsDone(q)) { const g = grant(String(q.i), XP); if (g) { flyFrom(el, g); coach(); } }
+  save();
+  document.querySelectorAll('.qz [data-v]').forEach(b => { const val = +b.dataset.v, cur = S.answers[q.i]; b.setAttribute('aria-checked', Array.isArray(cur) ? cur.includes(val) : cur===val); });
+  refresh();
+}
+function mission(q) {
+  if (Object.keys(S.answers[q.i]||{}).length < q.u) return;
+  const g = grant('m'+q.i, MISSION); if (!g) return; save();
+  say(`Quick round complete, ${g} bonus leaves.`);
+  setTimeout(() => { toast(`<span class="lf-i">${LEAFI}</span>Quick round complete <b>+${g} bonus leaves</b>`); const el = document.getElementById('quick'); if (el) flyFrom(el, g, g, 'center'); }, 650);
+}
+function paintRow(q, r) {
+  const a = S.answers[q.i]||{}, row = document.querySelector(`.qk-q[data-row="${r}"]`); if (!row) return;
+  row.querySelectorAll('[data-g]').forEach(b => b.setAttribute('aria-checked', +b.dataset.g.split(':')[1]===a[r]));
+  if (a[r]!==undefined && !row.classList.contains('ok')) { row.classList.add('ok'); row.querySelector('.n').innerHTML = tickSvg; }
+  const all = document.querySelector('[data-all]'); if (all) all.setAttribute('aria-pressed', allSet(q));
+}
+function setGroup(r, j) {
+  const q = Q[S.idx]; S.answers[q.i] = {...(S.answers[q.i]||{}), [r]:j}; tap();
+  const g = grant(`${q.i}:${r}`, XP); if (g) { flyFrom(document.querySelector(`[data-g="${r}:${j}"]`), g); coach(); }
+  save(); paintRow(q, r); refresh(); mission(q);
+  const a = S.answers[q.i], nx = q.rows.findIndex((_,k)=>k>r && a[k]===undefined);
+  if (nx>=0) { const el = document.querySelector(`.qk-q[data-row="${nx}"]`), rr = el.getBoundingClientRect(); if (rr.bottom > innerHeight - 120) el.scrollIntoView({behavior: RM ? 'auto' : 'smooth', block:'start'}); }
+}
+function setAll() {
+  const q = Q[S.idx], a = {...(S.answers[q.i]||{})}; let g = 0;
+  q.rows.forEach((_,r) => { a[r] = q.all; g += grant(`${q.i}:${r}`, XP); }); S.answers[q.i] = a; tap();
+  save(); q.rows.forEach((_,r)=>paintRow(q, r)); refresh();
+  if (g) { flyFrom(document.querySelector('[data-all]'), g); coach(); }
+  mission(q);
+}
+function next() {
+  if (busy) return;
+  const q = Q[S.idx];
+  if (q.k==='text') { const t = (document.getElementById('ta')||{}).value||''; S.answers[q.i] = t; if (t.trim()) flyFrom(document.getElementById('ta'), grant(String(q.i), XP), 1, 'center'); }
+  if (!canNext(q)) return;
+  const sec = SEC[q.si];
+  if (q.i===sec.end && !secDone(q.si) && Q.filter(x=>x.si===q.si).every(x=>x.opt||complete(x))) { save(); finishSection(q.si); return; }
+  if (q.i===Q.length-1) { if (S.earned.length===SEC.length) goComplete(); else { save(); openDrawer('jump'); } return; }
+  S.idx = q.i+1; S.furthest = Math.max(S.furthest, S.idx); ui.focusQ = true; save(); render(); scrollTo(0,0);
+}
+const back = () => { if (busy || S.idx===0) return; S.idx--; ui.focusQ = true; save(); render(); scrollTo(0,0); };
+const jump = i => { S.idx = i; S.screen = 'q'; ui.drawer = false; ui.jump = false; ui.focusQ = true; save(); render(); scrollTo(0,0); };
+const say = m => { const el = document.getElementById('sr'); el.textContent = ''; setTimeout(() => el.textContent = m, 60); };
+function setCue() {
+  document.getElementById('cue').innerHTML = cueHTML(Q[S.idx]);
+  document.querySelectorAll('.term').forEach(t => t.setAttribute('aria-expanded', t.dataset.term===ui.cue));
+}
+function exitNow() {
+  if (busy) return;
+  if (S.pending != null) { const si = S.pending; S.pending = null; closeReward(); if (si < SEC.length-1) { S.idx = SEC[si].end+1; S.furthest = Math.max(S.furthest, S.idx); } else { S.screen='complete'; save(); return render(); } }
+  if (S.screen==='q' && Q[S.idx].k==='text') S.answers[S.idx] = (document.getElementById('ta')||{}).value||'';
+  S.screen = 'saved'; ui.drawer = false; save(); render(); scrollTo(0,0);
+}
+
+document.addEventListener('click', e => {
+  if (ui.jump && !e.target.closest('#jpop') && !e.target.closest('#jumpBtn') && !e.target.closest('[data-act="jump"]')) openJump(false);
+  const t = e.target.closest('[data-act],[data-v],[data-g],[data-all],[data-term],[data-jump],[data-sec],[data-tab],[data-jsec]');
+  if (!t) { if (e.target===scrim) openDrawer(false); return; }
+  if (t.dataset.jsec) { ui.jsec = Math.max(0, Math.min(SEC.length-1, ui.jsec + +t.dataset.jsec)); renderJump(); const h = jpop.querySelector('.jc.c') || jpop.querySelector('.jx'); return; }
+  if (t.dataset.v !== undefined) return setAnswer(+t.dataset.v);
+  if (t.dataset.g) { const [r,j] = t.dataset.g.split(':').map(Number); return setGroup(r,j); }
+  if (t.dataset.all) return setAll();
+  if (t.dataset.term) { ui.cue = ui.cue===t.dataset.term ? null : t.dataset.term; return setCue(); }
+  if (t.dataset.jump) return jump(+t.dataset.jump);
+  if (t.dataset.sec) { const si = +t.dataset.sec; ui.openSec = ui.openSec===si ? -1 : si; return renderDrawer(); }
+  if (t.dataset.tab) { ui.tab = t.dataset.tab; return renderDrawer(); }
+  const a = t.dataset.act;
+  if (a==='start') { S.screen = 'q'; save(); render(); }
+  if (a==='resume') { S.screen = 'q'; render(); scrollTo(0,0); }
+  if (a==='restart') { S = blank(); ui = {...ui, lastIdx:null, shownXp:0, shownBadges:0}; S.screen = 'q'; save(); render(); }
+  if (a==='results') goComplete();
+  if (a==='next') next();
+  if (a==='back') back();
+  if (a==='continue') cont();
+  if (a==='jump') openJump(!ui.jump);
+  if (a==='jclose') { openJump(false); const b = document.getElementById('jumpBtn'); if (b && getComputedStyle(b).display!=='none') b.focus({preventScroll:true}); }
+  if (a==='cdstop') stopCountdown(true);
+  if (a==='menu') openDrawer('menu');
+  if (a==='coll') { ui.tab = 'stages'; openDrawer('coll'); }
+  if (a==='tabfacts') { ui.tab = 'facts'; openDrawer('coll'); }
+  if (a==='close') openDrawer(false);
+  if (a==='exit') exitNow();
+  if (a==='home') { S.screen = 'intro'; render(); }
+  if (a==='review') { S.idx = 0; S.screen = 'q'; save(); render(); openDrawer('jump'); }
+  if (a==='text') { document.body.classList.toggle('lg-text'); try { localStorage.setItem('aw-lg', document.body.classList.contains('lg-text')?'1':''); } catch(e) {} if (ui.drawer==='menu') renderDrawer(); else t.setAttribute('aria-pressed', document.body.classList.contains('lg-text')); }
+  if (a==='sound') { soundOn = !soundOn; try { localStorage.setItem('aw-snd', soundOn?'1':'0'); } catch(e) {} if (ui.drawer==='menu') renderDrawer(); else { t.setAttribute('aria-pressed',soundOn); t.innerHTML = ic(soundOn?'vol':'mute'); } if (soundOn) tap(); }
+});
+document.addEventListener('keydown', e => {
+  if (e.key==='Escape' && ui.jump) return openJump(false);
+  if (e.key==='Escape' && ui.drawer) return openDrawer(false);
+  if (S.screen!=='q' || ui.drawer || ui.jump || busy || reward.classList.contains('open') || e.target.tagName==='TEXTAREA' || e.metaKey || e.ctrlKey || e.altKey) return;
+  const q = Q[S.idx];
+  if (/^[1-9]$/.test(e.key) && q.k!=='quick') { const n = +e.key;
+    if ((q.k==='freq'&&n<=5) || ((q.k==='single'||q.k==='multi') && n<=q.o.length)) setAnswer(n-1); }
+  if (e.key==='Enter' && !e.target.closest('button')) { e.preventDefault(); next(); }
+});
+
+try { if (localStorage.getItem('aw-lg')) document.body.classList.add('lg-text'); } catch(e) {}
+render();
+</script>
+</body>
+</html>
